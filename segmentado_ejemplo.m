@@ -2,42 +2,157 @@ clc
 clear all
 close all
 warning off
+set(0,'defaultTextFontName','Courier')
 
 %leer la imagen
 original = imread('/Users/gianna/Documents/CINVESTAV/AID/img2/todos_blanco2.png');
+
+%pasar la imagen a espacio de grises
 x = rgb2gray(original);
 
 %mostrar imagen
-figure;
-imshow(x);
-title('Original Image');
+%figure;
+%imshow(x);
+%title('Original Image');
 
 %--------------------------------------------
 % detectar bordes
+%--------------------------------------------
 edge_detected = edge(x,'canny');
-%figure;
-%imshow(edge_detected);
+figure;
+imshow(edge_detected);
+title('Bordes canny');
 
 %cerrar la imagen de bordes
-cerrar = imclose(edge_detected,strel('line',3,135));
-cerrar = imclose(cerrar,strel('line',3,90));
-%figure;
-%imshow(cerrar);
-
-cerrar2 = imfill(cerrar,'holes');
-%figure;
-%imshow(x);
-
-abrir = imerode(cerrar2,strel('line',3,90));
+cerrar = imclose(edge_detected,strel('line',2,0));
 figure;
-imshow(abrir);
+imshow(cerrar);
+title('Cerrar imagen1');
 
-mask_image = bwareaopen(abrir,1000);
+%Hacer bwopen
+%
+mask_image = bwareaopen(cerrar,100);
 figure;
 imshow(mask_image);
+title('after a bwareaopen');
 
-mask_image = imclose(mask_image, strel('disk', 8));
-mask_image = imfill(mask_image,'holes');
+%__
+cerrar_h = imfill(mask_image,'holes');
+figure;
+imshow(cerrar_h);
+title('Fill image');
+%__
+
+
+%cerrar la imagen de bordes
+cerrar2 = imclose(cerrar_h,strel('line',2,90));
+figure;
+imshow(cerrar2);
+title('Cerrar imagen1');
+
+%__
+cerrar22 = imfill(cerrar2,'holes');
+figure;
+imshow(cerrar22);
+title('Fill image');
+%__
+
+%
+%
+%Hacer bwopen
+%
+mask_image = bwareaopen(cerrar22,1000);
+figure;
+imshow(mask_image);
+title('after a bwareaopen');
+
+%cerrar la imagen de bordes
+cerrar = imclose(mask_image,strel('line',3,135));
+figure;
+imshow(cerrar);
+title('Cerrar imagen1');
+
+%__
+cerrar2 = imfill(cerrar,'holes');
+figure;
+imshow(cerrar2);
+title('Fill image');
+%__
+
+%cerrar la imagen de bordes
+cerrar = imclose(mask_image,strel('disk',3));
+figure;
+imshow(cerrar);
+title('Cerrar imagen1');
+
+%__
+cerrar2 = imfill(cerrar,'holes');
+figure;
+imshow(cerrar2);
+title('Fill image');
+%__
+
+%
+%Hacer bwopen
+%
+mask_image = bwareaopen(cerrar2,500);
+figure;
+imshow(mask_image);
+title('after a bwareaopen');
+
+%dilatar
+mask_image2 = imfill(mask_image,'holes');
+figure;
+imshow(mask_image2);
+title('after a imfill holes');
+
+
+abrir = imerode(mask_image,strel('line',3,90));
+figure;
+imshow(abrir);
+title('Imerode');
+
+cerrar22 = imclose(abrir,strel('line',3,0));
+figure;
+imshow(cerrar22);
+title('Cerrar imagen2');
+
+cerrar2 = imfill(cerrar22,'holes');
+figure;
+imshow(cerrar2);
+title('Fill image');
+
+%abrir = imerode(cerrar2,strel('line',3,90));
+%figure;
+%imshow(abrir);
+%title('Imerode');
+
+mask_image = bwareaopen(cerrar2,3000);
+figure;
+imshow(mask_image);
+title('after a bwareaopen');
+
+%-----------
+% Erosionar
+%-----------
+erode = imerode(mask_image,strel('line',2,45));
+figure;
+imshow(erode);
+title('Imerode');
+
+
+%---END CODE --
+
+mask_image2 = imclose(mask_image, strel('disk', 8));
+figure;
+imshow(mask_image2);
+title('after a imclose con disco 8');
+
+
+mask_image = imfill(mask_image2,'holes');
+figure;
+imshow(mask_image2);
+title('after a imfill holes');
 
 % Define the structuring element for the morphological operations
 se = strel('disk', 5); % You can experiment with different structuring elements and sizes
