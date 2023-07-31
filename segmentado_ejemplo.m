@@ -83,7 +83,15 @@ figure, imshow(x);
 hold on;
 
 for idx = 1: length(idxOfSkittles)
-    h = rectangle('Position', statsDefects(idx).BoundingBox, 'EdgeColor', 'r', 'LineWidth', 2);
+    bb =  statsDefects(idx).BoundingBox;
+    h = rectangle('Position', [bb(1), bb(2), bb(3), bb(4)], 'EdgeColor', 'r', 'LineWidth', 2);
+% Calculate the centroid of the bounding box
+    centroidX = bb(1) + bb(3) / 2;
+    centroidY = bb(2) + bb(4) / 2;
+    
+    % Add text inside the rectangle
+    defectNumber = sprintf('objeto %d', idx);
+    text(centroidX, centroidY, defectNumber, 'Color', 'r', 'FontSize', 12, 'FontWeight', 'bold', 'HorizontalAlignment', 'center');
 end
 
 title(['Hay ',num2str(num), ' objetos']);
