@@ -19,41 +19,38 @@ edge_detected = edge(x,'canny');
 %cerrar la imagen de bordes
 cerrar = imclose(edge_detected,strel('square',4));
 
-
 %Hacer bwopen
 mask_image = bwareaopen(cerrar,80);
 
-%__
+%llenar hoyos
 cerrar_h = imfill(mask_image,'holes');
 
-
-%cerrar la imagen de bordes
+%cerrar la imagen de bordes con
+%elemento estructurante linea de 3 a 90 grados
 cerrar2 = imclose(cerrar_h,strel('line',3,90));
 
-%__
+%llenar hoyos
 cerrar22 = imfill(cerrar2,'holes');
 
-%
-%Hacer bwopen
+%Hacer bwopen con elementos de 1000
 mask_image = bwareaopen(cerrar22,1000);
 
-
-%cerrar la imagen de bordes
+%cerrar la imagen con elemento estructurante octagono
 cerrar = imclose(mask_image,strel('octagon',9));
 
+%llenar hoyos
 cerrar2 = imfill(cerrar,'holes');
-
-
 
 %EROSIONAR
 abrir = imerode(cerrar2,strel('line',2,180));
 
-
+%Hacer bwopen con elementos de 10
 mask_image = bwareaopen(abrir,10);
 figure;
 imshow(mask_image);
-title('after a bwareaopen');
+title('Imagen segmentada');
 
+%Poner mascara con los colores
 red = original(:,:,1).*uint8(mask_image);
 green = original(:,:,2).*uint8(mask_image);
 blue = original(:,:,3).*uint8(mask_image);
@@ -63,12 +60,11 @@ imshow(op);
 title('MASK Image');
 
 imshowpair(original,mask_image,'montage');
-%imshowpair(original,mask_image,'montage');
 
+%obtener el numero de objetos
 [L,num]=bwlabel(mask_image,4);
 disp('Numero de objetos')
 disp(num)
-
 
 Iregion = regionprops(mask_image,'centroid');
 
@@ -85,14 +81,14 @@ hold on;
 for idx = 1: length(idxOfSkittles)
     bb =  statsDefects(idx).BoundingBox;
     h = rectangle('Position', [bb(1), bb(2), bb(3), bb(4)], 'EdgeColor', 'r', 'LineWidth', 2);
-% Calculate the centroid of the bounding box
+    % Calcular el centroide de la caja
     centroidX = bb(1) + bb(3) / 2;
     centroidY = bb(2) + bb(4) / 2;
     
-    % Add text inside the rectangle
+    % Agregar texto dentro del rectangulo
     defectNumber = sprintf('objeto %d', idx);
     text(centroidX, centroidY, defectNumber, 'Color', 'r', 'FontSize', 12, 'FontWeight', 'bold', 'HorizontalAlignment', 'center');
 end
 
-title(['Hay ',num2str(num), ' objetos']);
+title(['Objetos en la imagen ',num2str(num)]);
 hold off;
