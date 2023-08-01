@@ -5,7 +5,7 @@ warning off
 set(0,'defaultTextFontName','Courier')
 
 %leer la imagen
-original = imread('/Users/gianna/Documents/CINVESTAV/AID/img2/todos_blanco2.png');
+original = imread('/Users/gianna/Documents/CINVESTAV/AID/img2/ppinza.png');
 
 %pasar la imagen a espacio de grises
 x = rgb2gray(original);
@@ -13,11 +13,13 @@ x = rgb2gray(original);
 %--------------------------------------------
 % detectar bordes
 %--------------------------------------------
-edge_detected = edge(x,'canny');
+edge_detected = edge(x,'canny',.03);
 
+%edge_detected = bwareaopen(edge_detected,20);
+imshow(edge_detected);
 
 %cerrar la imagen de bordes
-cerrar = imclose(edge_detected,strel('square',4));
+cerrar = imclose(edge_detected,strel('square',5));
 
 
 %Hacer bwopen
@@ -36,10 +38,12 @@ cerrar22 = imfill(cerrar2,'holes');
 %
 %Hacer bwopen
 mask_image = bwareaopen(cerrar22,1000);
-
+mask_image = imerode(mask_image,strel('disk',2));
+mask_image = bwareaopen(mask_image,200);
+imshow(mask_image);
 
 %cerrar la imagen de bordes
-cerrar = imclose(mask_image,strel('octagon',9));
+cerrar = imclose(mask_image,strel('octagon',3));
 
 cerrar2 = imfill(cerrar,'holes');
 
@@ -50,9 +54,9 @@ abrir = imerode(cerrar2,strel('line',2,180));
 
 
 mask_image = bwareaopen(abrir,10);
-figure;
-imshow(mask_image);
-title('after a bwareaopen');
+%figure;
+%imshow(mask_image);
+%title('after a bwareaopen');
 
 red = original(:,:,1).*uint8(mask_image);
 green = original(:,:,2).*uint8(mask_image);
