@@ -5,18 +5,20 @@ warning off
 set(0,'defaultTextFontName','Courier')
 
 %leer la imagen
-original = imread('/Users/gianna/Documents/CINVESTAV/AID/img2/toitos_melon.png');
+original = imread('/Users/gianna/Documents/CINVESTAV/AID/img2/todas_piezas/blanco.png');
 
 %pasar la imagen a espacio de grises
 x = rgb2gray(original);
+%x = adapthisteq(x,'clipLimit',0.02,'Distribution','rayleigh');
 
 %--------------------------------------------
 % detectar bordes
 %--------------------------------------------
-edge_detected = edge(x,'canny',.03);
+edge_detected = edge(x,'canny');
 
 %edge_detected = bwareaopen(edge_detected,20);
 imshow(edge_detected);
+
 %cerrar la imagen de bordes
 cerrar = imclose(edge_detected,strel('square',5));
 

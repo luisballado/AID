@@ -5,23 +5,25 @@ warning off
 set(0,'defaultTextFontName','Courier')
 
 %leer la imagen
-original = imread('/Users/gianna/Documents/CINVESTAV/AID/img2/todos_2.png');
+original = imread('/Users/gianna/Documents/CINVESTAV/AID/img2/todas_piezas/melon.png');
 
 %pasar la imagen a espacio de grises
 x = rgb2gray(original);
+%x = adapthisteq(x,'clipLimit',0.02,'Distribution','rayleigh');
 
 %--------------------------------------------
 % detectar bordes
 %--------------------------------------------
-edge_detected = edge(x,'canny',.03);
+edge_detected = edge(x,'canny');
+
+%edge_detected = bwareaopen(edge_detected,20);
 imshow(edge_detected);
 
 %cerrar la imagen de bordes
-cerrar = imclose(edge_detected,strel('line',2,45));
-imshow(cerrar);
+cerrar = imclose(edge_detected,strel('square',5));
+
 %Hacer bwopen
 mask_image = bwareaopen(cerrar,80);
-imshow(mask_image);
 
 %llenar hoyos
 cerrar_h = imfill(mask_image,'holes');
