@@ -5,7 +5,7 @@ warning off
 set(0,'defaultTextFontName','Courier')
 
 %leer la imagen
-original = imread('/Users/gianna/Documents/CINVESTAV/AID/img2/tt_blanco.png');
+original = imread('/Users/gianna/Documents/CINVESTAV/AID/img2/toitos_melon.png');
 
 %pasar la imagen a espacio de grises
 x = rgb2gray(original);
@@ -17,7 +17,6 @@ edge_detected = edge(x,'canny',.03);
 
 %edge_detected = bwareaopen(edge_detected,20);
 imshow(edge_detected);
-
 %cerrar la imagen de bordes
 cerrar = imclose(edge_detected,strel('square',5));
 
