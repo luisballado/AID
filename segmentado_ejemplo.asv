@@ -93,13 +93,31 @@ statsDefects = stats(idxOfSkittles);
 bbox = statsDefects(idxOfSkittles).BoundingBox;
 croppedImage = imcrop(mask_image, bbox);
 
-p_img = paddedImage(croppedImage,10);
+%AGREGAR UN PAFF
+% Specify the desired padding size (in pixels)
+paddingSize = 20; % Adjust this value according to your requirement
+
+% Get the size of the binary image
+[height, width] = size(croppedImage);
+
+% Calculate the dimensions of the padded image
+paddedHeight = height + 2 * paddingSize;
+paddedWidth = width + 2 * paddingSize;
+
+% Create a larger canvas for the padded image
+paddedImage = zeros(paddedHeight, paddedWidth);
+
+% Calculate the position to paste the binary image on the canvas
+pastePosX = paddingSize + 1;
+pastePosY = paddingSize + 1;
+
+% Paste the binary image onto the padded canvas
+paddedImage(pastePosY: pastePosY + height - 1, pastePosX: pastePosX + width - 1) = croppedImage;
+
 % Display the padded image
 figure;
-imshow(p_img);
+imshow(paddedImage);
 title('Padded Binary Image');
-
-%%TERMINAR AGREGAR PADDING
 
 figure;
 imshow(croppedImage);
