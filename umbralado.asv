@@ -4,26 +4,48 @@ close all
 warning off
 set(0,'defaultTextFontName','Courier')
 
-original = imread('/Users/gianna/Documents/CINVESTAV/AID/imgs/Images/desarmador/png/des_10.png');
+original = imread('/Users/gianna/Documents/CINVESTAV/AID/imgs/Images/desarmador/png/des_24.png');
+%figure;
+%imshow(original);
 
-
-brightness_factor = 1.5; % Change this value to adjust the brightness. A value > 1 increases brightness, < 1 decreases brightness.
+brightness_factor = 2.0; % Change this value to adjust the brightness. A value > 1 increases brightness, < 1 decreases brightness.
 adjusted_image = double(original) * brightness_factor;
 adjusted_image = uint8(adjusted_image); % Convert back to uint8 format (8-bit) for displaying and saving.
-x = rgb2gray(adjusted_image);
+%imshow(adjusted_image);
 
-edge_detected = edge(x,'canny',0.06);
-cerrar = imclose(edge_detected,strel('square',3));
+x = rgb2gray(adjusted_image);
+%figure;
+%imshow(x);
+
+edge_detected = edge(x,'canny',0.1);
+
+%figure;
+%imshow(edge_detected);
+
+cerrar = imclose(edge_detected,strel('sphere',5));
+
+figure;
+imshow(cerrar);
 
 xx = imfill(cerrar,'holes');
+figure;
+imshow(xx);
 
-figure:
+%EROSIONAR
+w = strel('square',4);
+E = imerode(xx,w);
+figure;
+imshow(E);
 
-se = strel('square', 1);
+%se = strel('square', 1);
 % Apply imopen to the binary image
-output_image = imopen(xx, se);
+%output_image = imopen(xx, se);
+%figure;
+%imshow(output_image);
+mask_image = bwareaopen(xx,400);
 
-mask_image = bwareaopen(output_image,400);
+figure;
+imshow(mask_image);
 
 m_im = imclose(mask_image,strel('line',4,0));
 
