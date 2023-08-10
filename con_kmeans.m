@@ -1,5 +1,5 @@
 % Read an image
-image = imread('/Users/gianna/Documents/CINVESTAV/AID/img2/todo.png');
+image = imread('/Users/gianna/Documents/CINVESTAV/AID/images/train/tijera/t_1.png');
 
 %image = imread('/Users/gianna/Documents/personal/48279979_024_8fae.jpg');
 % Convert the image to double precision for processing
@@ -31,5 +31,5 @@ filledImage = imfill(segmentedImage, 'holes');
 % Display the original binary image and the filled image
 
 figure;
-imshow(filledImage,[]);
+imshow(~filledImage,[]);
 title('Filled Image');

@@ -4,7 +4,7 @@ close all
 warning off
 set(0,'defaultTextFontName','Courier')
 
-original = imread('/Users/gianna/Documents/CINVESTAV/AID/imgs/Images/llave_perica/png/h_0.png');
+original = imread('/Users/gianna/Documents/CINVESTAV/AID/images/train/desarmador/des_2_v2.png');
 %figure;
 %imshow(original);
 
@@ -14,15 +14,15 @@ adjusted_image = uint8(adjusted_image); % Convert back to uint8 format (8-bit) f
 %imshow(adjusted_image);
 
 x = rgb2gray(adjusted_image);
-%figure;
-%imshow(x);
+figure;
+imshow(x);
 
 edge_detected = edge(x,'canny');
 
 figure;
 imshow(edge_detected);
 
-cerrar = imclose(edge_detected,strel('sphere',10));
+cerrar = imclose(edge_detected,strel('disk',10));
 
 figure;
 imshow(cerrar);
@@ -30,6 +30,8 @@ imshow(cerrar);
 xx = imfill(cerrar,'holes');
 figure;
 imshow(xx);
+
+
 
 %EROSIONAR
 w = strel('square',4);

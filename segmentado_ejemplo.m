@@ -5,7 +5,7 @@ warning off
 set(0,'defaultTextFontName','Courier')
 
 %leer la imagen
-original = imread('/Users/gianna/Documents/CINVESTAV/AID/img2/ppinza.png');
+original = imread('/Users/gianna/Documents/CINVESTAV/AID/images/train/desarmador/des_1.png');
 
 %pasar la imagen a espacio de grises
 x = rgb2gray(original);
@@ -99,11 +99,16 @@ figure;
 imshow(p_img);
 title('Padded Binary Image');
 
+Xrec = zeros(1,2);
+Xrec(1,:) = hu_moments(p_img);
+
 %%TERMINAR AGREGAR PADDING
 
 figure;
 imshow(croppedImage);
-imwrite(croppedImage, "/Users/gianna/Documents/CINVESTAV/AID/img2/recorte.png");
+%imwrite(croppedImage, "/Users/gianna/Documents/CINVESTAV/AID/img2/recorte.png");
+
+
 
 figure, imshow(x);
 hold on;
