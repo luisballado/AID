@@ -1,0 +1,103 @@
+% LaTeX Template for short student reports.
+% Citations should be in bibtex format and go in references.bib
+\documentclass[a4paper, 11pt]{article}
+\usepackage[top=3cm, bottom=3cm, left = 2cm, right = 2cm]{geometry} 
+\geometry{a4paper} 
+\usepackage[utf8]{inputenc}
+\usepackage{textcomp}
+\usepackage[spanish]{babel}
+\usepackage{graphicx} 
+\usepackage{amsmath,amssymb}  
+\usepackage{bm}  
+\usepackage[pdftex,bookmarks,colorlinks,breaklinks]{hyperref}  
+%\hypersetup{linkcolor=black,citecolor=black,filecolor=black,urlcolor=black} % black links, for printed output
+\usepackage{tocloft}
+
+\hypersetup{%
+  colorlinks = true,
+  linkcolor  = black
+}
+
+\usepackage{memhfixc} 
+\usepackage{pdfsync}  
+\usepackage{fancyhdr}
+
+\graphicspath{ {images/} }
+
+\begin{document}
+\selectlanguage{spanish}
+
+\begin{titlepage}
+  \clearpage\thispagestyle{empty}
+  \centering
+  \vspace{1cm}
+  % Rubriker
+  {\large Centro de Investigación y Estudios Avanzados del I.P.N. \par}
+  \vspace{1cm}
+
+  \begin{figure}[h!]
+    \centering
+    \includegraphics[scale=0.5]{cinves.png}
+  \end{figure}
+    
+  \vspace{1cm}
+  {\Huge \textbf{Análisis de Imágenes Digitales}} \\
+  \vspace{1cm}
+  {\large \textbf{Dr. Wilfrido Gómez} \par}
+  \vspace{4cm}
+         {\normalsize Luis Alberto Ballado Aradias \par} 
+  \vspace{2cm}
+    
+  % Information om kurshållaren
+  {\normalsize Avdelningen for Statistik och maskininlarning \\
+    Institutionen for datavetenskap \\
+    Linkopings universitet \par}
+  
+  % Datum
+  {\normalsize 21-08-2023 \par}
+  \vspace{2cm}
+    
+  \pagebreak
+  
+\end{titlepage}
+
+\tableofcontents{}
+
+\pagebreak
+\section{Sección 1}
+
+My project was about \ldots
+
+I developed a system to \ldots
+
+We did some experiments to find out \ldots
+
+The main results were \ldots
+
+\pagebreak
+
+\section{Sección 2}
+
+I did some background reading in the following areas \ldots
+
+\pagebreak
+
+\section{Sección 3}
+
+My system worked as follows \ldots
+
+\pagebreak
+
+\section{Sección 4}
+
+We did some experiments \ldots
+
+\pagebreak
+
+\section{Conclusiones}
+
+From our experiments we can conclude that \ldots
+
+\bibliographystyle{abbrv}
+% \bibliography{references}  % need to put bibtex references in references.bib 
+\end{document}

@@ -1,0 +1,168 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Anger dokumentklassen
+% Inställningen 'openany' används för att tillåta kapitel att börja på en ojämn sida i rapporterna
+\documentclass[11pt, openany]{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Laddar in paket som används i dokumentet
+\usepackage[]{graphicx}
+\usepackage[]{color}
+\usepackage{alltt}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\setlength{\parskip}{\smallskipamount}
+\setlength{\parindent}{0pt}
+
+% Ändrar vilket djup på rubriker som ska numreras
+\setcounter{secnumdepth}{3}
+
+% Ändrar vilket djup på rubriker som ska visas i innehållsförteckningen
+\setcounter{tocdepth}{3}
+
+% Ändrar sidans marginaler
+\usepackage[top=100pt,bottom=100pt,left=68pt,right=66pt]{geometry}
+
+% Paket som skapar dummy-text
+\usepackage{lipsum}
+
+% Hindrar LaTeX att fylla ut en sida hela vägen ner till botten
+\raggedbottom
+\usepackage[spanish]{babel}
+\usepackage{fancyhdr}
+\fancyhf{} % Tar bort alla header/footer standardinställningar från paketet
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0pt} % Ändrar (tar bort) linje som separerar header och övrig text på sida
+\pagestyle{fancy}
+
+% Ändrar stilen på kapitelrubriker
+\usepackage{titlesec}
+\titleformat{\chapter}
+            {\normalfont\LARGE\bfseries}{\thechapter.}{1em}{}
+\titlespacing{\chapter}{0pt}{50pt}{2\baselineskip} % Ändrar avstånd från rubrik till brödtext
+            
+% Ändrar inställningar för tabeller
+\usepackage{float}
+\floatstyle{plaintop} % Ändrar att tabellbeskrivningar hamnar ovanför tabellen
+\restylefloat{table}
+
+% Lägger till avstånd mellan beskrivning och tabell
+\usepackage[tableposition=top]{caption}
+
+% Ändrar inställningar för länkar (referenser)
+\usepackage{hyperref}
+\hypersetup{hidelinks,
+  linkcolor = blue} % Ändrar länkarnas färg till blå och tar bort den hemska röda rutan som vanligtvis skapas
+
+% Anger en sökväg till en mapp där flera bilder kan läggas och senare anges med deras namn i rapporten
+\graphicspath{ {images/} }
+
+% Ändrar att första delen av rapporten numreras med romerska siffror
+\frontmatter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Påbörjar dokumentet
+\begin{document}
+
+%%% Väljer svenska som språk för automatiserade rubriker
+\selectlanguage{spanish}
+
+%%%%% Lägger till instruktioner till titelsidan
+\begin{titlepage}
+  \clearpage\thispagestyle{empty}
+  \centering
+  \vspace{2cm}
+  
+  % Rubriker
+  {\large Centro de Inves \par}
+  \vspace{4cm}
+  {\Huge \textbf{Laboration X}} \\
+  \vspace{1cm}
+  {\large \textbf{Kurskod} \par}
+  \vspace{4cm}
+         {\normalsize Forfattare1 Namn \\ % \\ anger en radbrytning
+           Forfattare2 Namn \par}
+  \vspace{2cm}
+  
+  \includegraphics[scale=0.75]{liu_logga.png}
+  
+  \vspace{2cm}
+  
+  % Information om kurshållaren
+  {\normalsize Avdelningen for Statistik och maskininlarning \\
+    Institutionen for datavetenskap \\
+    Linkopings universitet \par}
+  
+  % Datum
+  {\normalsize 20XX-XX-XX \par}
+  \vspace{2cm}
+  
+  \pagebreak
+  
+\end{titlepage}
+
+% Lägger till en innehållsförteckning
+\tableofcontents{}
+
+% Sidbrytning
+\clearpage
+
+% Kommentera bort följande tre rader för att skapa en figur- och tabellförteckning. Behövs ej för laborationsrapporter
+
+% \listoffigures
+% \clearpage
+% \listoftables
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%% Raderna ovanför denna kommentar bör inte ändras, förutom informationen som ska visas på titelsidan
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%% Brödtexten (rapporten) startar här
+\mainmatter
+
+% Skapar ett nytt kapitel med chapter, delkapitel med section, subsection, subsubsection osv.
+\chapter{Introduktion}
+Introducera laborationen; de datamaterial som används, målen med uppgifterna och annat förberedande arbete. Detta kan inkludera inläsning av data och paket där all form av output ska vara gömt såvida inget annat anges.
+
+
+\chapter{Uppgifter}
+% Om * anges efter section/chapter-kommandot skapas en onumrerad rubrik som inte läggs till i innehållsförteckningen
+\section*{Uppgift 1}
+% För att en onumrerad rubrik ska läggas till i förteckningen används följande kommando
+\addcontentsline{toc}{section}{Uppgift 1}
+
+% Skapar ett onumrerat delkapitel och lägger inte till den manuellt i förteckningen
+\subsection*{Exempel på hur R används i LaTeX}
+Notera att i Overleaf fås ett felaktigt formateringsfel vid användande av
+\subsection*{Figurer}
+% Här kommer en cross-reference till min tidigare etikett. \pageref anger sidan som etiketten ligger på, och \ref anger kapitel-, figur- eller tabellnumreringen.
+Mitt data som ni kan se på sida \pageref{min_data}, har jag använt för att göra den snygga figur \ref{fig:En-figur} som finns på sida \pageref{fig:En-figur}.
+
+% \begin{verbatim} är ett sätt att kunna skriva ut oformaterad text direkt i rapporten. För R-kod rekommenderas det att skapa en code-chunk och använda echo = TRUE istället.
+Diagram skapas inte automatiskt i floating enviroment, så det får man göra manuellt i LaTeX med: \begin{verbatim}
+  \begin{figure}
+    \centering
+    \includegraphics{} % R-kod som skapar ett diagram kan ersätta \includegraphics{}
+    \caption{Caption}
+    \label{fig:my_label}
+  \end{figure}
+\end{verbatim}
+
+
+\subsection*{Linjär regression}
+Jag har gjort massa häftiga analyser som linjär regression med alla \Sexpr{nrow(iris)} observationer:
+
+
+
+Oavsett dyker alla tabeller upp i tabellförteckningen utan problem.
+
+% Ett annat sätt att göra en sidbrytning
+\pagebreak
+
+\chapter{Lärdomar, problem, övriga kommentarer}
+Under detta kapitel vill jag att ni tar upp de saker som ni lärt er, eventuella problem ni stött på och andra saker (kopplade till kursen) som ni tänkt på under arbetet med laborationen. Dessa tankar kan vara bra att ha när det är dags för att repetera kursen, så ni kommer ihåg saker som ni kanske hade lite problem med och fick göra någon speciallösning på eller liknande.
+
+
+% Lägger till en bibliografi (referenslista)
+\bibliographystyle{plain} % Anger stilen
+\bibliography{referencias.bib} % Anger vilken BiBTeX-fil som ska användas
+% Lägger till bibliografin i innehållsförteckningen
+\addcontentsline{toc}{chapter}{\bibname}
+
+\end{document}
