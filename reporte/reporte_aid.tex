@@ -1,6 +1,7 @@
 % LaTeX Template for short student reports.
 % Citations should be in bibtex format and go in references.bib
 \documentclass[a4paper, 11pt]{article}
+
 \usepackage[top=3cm, bottom=3cm, left = 2cm, right = 2cm]{geometry} 
 \geometry{a4paper} 
 \usepackage[utf8]{inputenc}
@@ -21,6 +22,40 @@
 \usepackage{memhfixc} 
 \usepackage{pdfsync}  
 \usepackage{fancyhdr}
+\usepackage{amsmath}
+
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{tikz}
+
+\usepackage{smartdiagram}  
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codespurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+
 
 \graphicspath{ {images/} }
 
@@ -32,7 +67,7 @@
   \centering
   \vspace{1cm}
   % Rubriker
-  {\large Centro de Investigación y Estudios Avanzados del I.P.N. \par}
+  {\Huge \textbf{Centro de Investigación y Estudios Avanzados del I.P.N.} \par}
   \vspace{1cm}
 
   \begin{figure}[h!]
@@ -41,63 +76,360 @@
   \end{figure}
     
   \vspace{1cm}
-  {\Huge \textbf{Análisis de Imágenes Digitales}} \\
-  \vspace{1cm}
-  {\large \textbf{Dr. Wilfrido Gómez} \par}
-  \vspace{4cm}
-         {\normalsize Luis Alberto Ballado Aradias \par} 
-  \vspace{2cm}
+         {\Huge \textbf{Reconocimiento de 8 herramientas}\par} 
+         \vspace{4cm}
+                {\Large Materia: Analisis de imagenes digitales \par} 
+                \vspace{3cm}
+                {\Large Catedratico: Dr. Wilfrido Gomez- \par} 
+                \vspace{1cm}
+                {\Large Alumno: Luis Alberto Ballado Aradias \par} 
+                
+                \vspace{3cm}
+                % Datum
+                       {\normalsize \today \par}
+                       
     
-  % Information om kurshållaren
-  {\normalsize Avdelningen for Statistik och maskininlarning \\
-    Institutionen for datavetenskap \\
-    Linkopings universitet \par}
-  
-  % Datum
-  {\normalsize 21-08-2023 \par}
-  \vspace{2cm}
-    
-  \pagebreak
+%  \pagebreak
   
 \end{titlepage}
 
 \tableofcontents{}
 
 \pagebreak
-\section{Sección 1}
-
-My project was about \ldots
-
-I developed a system to \ldots
-
-We did some experiments to find out \ldots
-
-The main results were \ldots
+\renewcommand\lstlistlistingname{List of Code}
+\lstlistoflistings
 
 \pagebreak
 
-\section{Sección 2}
+\section{Introducción}
 
-I did some background reading in the following areas \ldots
+El Análisis de imagenes digitales es un área fasinante que engloba muchas areas de las ciencias computacionales como Optimización y Aprendizaje de máquinas.\\
+
+La imagen muestran las áreas dentro de los Análisis de imagenes
+
+\smartdiagram[constellation diagram]{Análisis de imagenes, Reconocimiento de patrones, Optimización, Aprendizaje de máquinas, Procesamiento de imagenes}  
+   % here, the first element is placed at the center, and rest elements are places around that circle in the form of bubbles.  
+  
+
+\begin{tikzpicture}
+  \tikzset{venn circle/.style={draw,circle,minimum width=6cm,fill=#1,opacity=0.4}}
+
+  \node [venn circle = red] (A) at (0,0) {$A$};
+  \node [venn circle = blue] (B) at (60:4cm) {$B$};
+  \node [venn circle = green] (C) at (0:4cm) {$C$};
+  \node[left] at (barycentric cs:A=1/2,B=1/2 ) {$A \cap B$}; 
+  \node[below] at (barycentric cs:A=1/2,C=1/2 ) {$A \cap C$};   
+  \node[right] at (barycentric cs:B=1/2,C=1/2 ) {$B \cap C$};   
+  \node[below] at (barycentric cs:A=1/3,B=1/3,C=1/3 ){$A \cap B \cap C$};
+\end{tikzpicture}  
+
+Las dificultades que se tienen dentro del procesamiento de imagenes digitales son la iluminación del ambiente, siendo los sensores perceptibles a la iluminancia al obtener la imagen.\\
+
+Una imagen $f(x,y)$ se puede modelar como el producto de dos componentes $f(x,y) = i(x,y),r(x,y)$, donde $0<i(x,y)<\infty$ es la componente de iluminación y $0<r(x,y)<1$ es la componente de reflactancia.\\
+
+Las operaciones aritméticas entre pixeles, la adición de la misma imagen por varias iteraciones reduce el ruido, sustracciones de dos imagenes de la misma toma detecta los cambios en los pixeles de la imagen, la multiplicación de imagenes para enmascarar zonas de interes.\\
+
+En la información que puede obtener de sus vecinos para detectar bordes a partir de distancias entre pixeles.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.5\textwidth]{cinves}
+\caption{Example of a parametric plot ($\sin (x), \cos(x), x$)}
+\end{figure}
+
+Euclidiana $D_{e}(p,q)=[((x-u)^{2}+(y-v)^{2})^{\frac{1}{2}}]$ \\
+
+cuatro vencindad usando los vecinos horizontales y verticales.\\
+
+Suponga una imagen con k regiones disjuntas $R_{k}, k=1,2,..,k$ sea $R_{u}$ la unión de las k regiones y $(R_{u})^{c}$ su complemento.\\
+
+Entonces los puntos en Ru representan el primer plano y los puntos de $(R_{u})^{c}$ representan el fondo.\\
+
+Contorno de una region\\
+
+El contorno de una región conexa es el conjunto de pixeles que tienen al menos en pixel vecino que corresponde al fondo en 4 ó 8 adyacencia.\\
+
+Buscar que tipo de etiquetado usa BWLABEL .- QUE ALGORITMO?\\
+
+Etiquetado de regiones conexas\\
+
+Data aumentation\\
+
+Se usaron transformaciones geometricas para modificar la relaciòn espacial entre píxeles en una imágen.\\
+
+Usando propiedades que no deformen al objeto de interes.\\
+
+\begin{itemize}
+\item Rotaciones
+\item Traslaciones
+\end{itemize}
+
+Logrando crear imagenes artificiales.\\
+
+
+El mejoramiento como manipulación de una imagen tal que el resultado sea más útil que la imagen original para una aplicación particular.\\
+
+Una transformación de intensidad modifica el constraste.\\
+
+Ecualización del histograma.\\
+
+No se tuvo que ecualizar ni mejorar por CLAHE, pero es bueno saber la existencia de estas tecnicas para crear sistemas y filtros sofisticados.\\
+
+Modo de degradación de una imagen.\\
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.5\textwidth]{cinves}
+\caption{Modelos de ruido}
+\end{figure}
+
+No se hizo uso de ningun filtro, buscando evitar el efecto de deslavado y poder detectar los bordes lo más puros posibles.\\
+
+Pero el filtro de difusión anisotrópico puede considerarse en la implementación.\\
+
+Se probó la detección de bordes a partir del gradiente, pero la demaciada información nos afectaba en un ciclo para detectar bordes como canny edges.\\
+
+EJEMPLO DE LAPLACIANO DEL GAUSIANO\\
+
+Los beneficios de la aplicación del teorema de convolución nos ayuda en la reducción de la complejidad computacional, al solo considerar una multiplicación en  frecuencia.\\
+
+Operadores morfologicos\\
+
+Los elementos estructurantes, donde podemos encontrar la línea puede tener inclinaciones a ciertos grados y ser de 4 vecindad ó 8 vecindad.\\
+
+La erosión y dilatación que son operadores muy buenos y fueron aplicados en el proyecto.
+
+\begin{itemize}
+\item Apertura: una erosión seguida de una dilatación $f o b = (f-b)+b$
+\item Cerradorua: una dilatación, seguida de una erosión $f o b = (f+b)-b$
+\end{itemize}
+
+El borde de un conjunto A que contiene los píxeles del primer plano se obtiene como:
+
+$B(A)=A-(A-b)$ donde A es la figura binaria y b el elemento estructurante.
+
+Rellenado de orificios.\\
+
+Un orificio es una región del fondo rodeado por un borde conexo de pixeles del primer plano.\\
+
+Se efectua una reconstrucción por dilatación.\\
+
+
 
 \pagebreak
 
-\section{Sección 3}
+\section{Resultados}
 
-My system worked as follows \ldots
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.5\textwidth]{cinves}
+\caption{Esqueletización}
+\end{figure}
+
+Dentro de las imagenes, la similitud de esqueletos entre la cinta, la llave perica, tijera, pinzas de punta y electrica que tienen formas similares.
+
+La mayoria de desarmadores no tiene ramas y tiene dos puntos finales, lo que lo confunde con una cinta al solo considerar las ramas y los puntos terminales se tiene una exactitud del 20\%, mientras al agregar el num de pixeles crece al 78\%, agregando más información como el área y perimetro la probabilidad de acierto crece aún más, presentandose valores arriba del 90\%.
+
+\subsection{Umbralado con el método de Otsu}
+
+Al afectarnos las partes cromadas, se busco crear una tecnica basica pero asu vez robusta a cambios de colores haciendo uso de bordes de canny.\\
+
+\subsection{Superpixels}
+
+\subsection{K-means}
+
+\subsection{Descripción con rasgos de forma}
+
+El reconocimiento automático de objetos requiere calcular rasgos que describan propiedades fisicas de los objetos.\\
+
+Un rasgo (atributo o caracteristica), es un valor numérico que cuantifica alguna propiedad de forma, textura, color, geometria, etc.
+
+\begin{itemize}
+\item Un rasgo debe ser discriminante, invariante, incorrelado y rápido de computar.
+\item Los rasgos de forma generalmente se calculan a partir de la segmentación del objeto y se divide entre todos los pixeles de las regiones de interes.
+\item Basados en región distribución de todos los pixeles.
+\item Basados en contorno, variaciones a lo largo del contorno.
+\end{itemize}
+
+\subsubsection{Área y perímetro}
+
+El área es el número total de pixeles que cubre la región del objeto.\\
+
+El perimetro es la longitud del contorno del objeto. El resultado depende del tipo de conectividad que pueda tener.
+
+Elementos básicos.
+\begin{itemize}
+\item Cerco convexo
+  \begin{itemize}
+  \item Solidez
+  \item Convexidad
+  \end{itemize}
+\item Esqueleto
+\item Geométricos
+  \begin{itemize}
+  \item Redondez
+  \item Circularidad
+  \item Compacidad
+  \item Factor de forma
+  \end{itemize}
+\end{itemize}
+
+\subsubsection{Rasgos basados en esqueleto}
+
+\begin{itemize}
+\item Puntos finales
+\item Ramas
+\item Número de pixles
+\end{itemize}
+
+\subsubsection{Momentos invariantes}
+
+Los momentos son proyecciones de una función sobre una base polinomial usados para medir la distribución de masa de un cuerpo.
 
 \pagebreak
 
-\section{Sección 4}
+\section{Clasificación de objetos}
+
+Capas del reconocimiento de objetos en imagenes.
+
+\begin{enumerate}
+\item Sensado.- Capturar la imagen.
+\item Preprocesamiento.- Mejorar la calidad de la imagen y segmentar los objetos de interes.
+\item Extracción de caracteristicas.- Describir los objetos con rasgos cuantitativos discriminantes e invariantes.
+\item Clasificación.- Asignar una etiqueta de clase a cada objeto.
+\end{enumerate}
+
+Obtener un vector de patrones.
+
+Para el proyecto se consideran ocho clases sindo representadas por los objetos siguientes:
+
+\begin{enumerate}
+\item Cinta de medir
+\item Desarmador
+\item Martillo
+\item Pinza electrica
+\item Pinza de presión
+\item Pinza de punta
+\item Perica
+\item Tijeras
+\end{enumerate}
+
+En este proyecto se usa el método de datos de entrenamiento que son vectores de patrones asociados a una etiqueta de clase (x,y) con $y \in \Omega = {w_{1},...,w_{c}}$\\
+
+MOSTRAR EN DIAGRAMA DE LOS PROCEOS PARA LA CLASIFICACION\\
+
+La selección del algoritmo de clasificación debe tener las siguientes cualidades.
+
+\begin{itemize}
+\item Generación de fronteras de decisión no lineales.
+\item Clasificación en más de dos clases (multiclases).
+\item Entrenamiento en un tiempo de cómputo razonable. 
+\end{itemize}
+
+Se elige el clasificador k-nn de vecinos más cercanos por su simpleza.
+
+\pagebreak
+
+\section{Apendice}
+
+\subsection{Script de rasgos}
 
 We did some experiments \ldots
+
+\begin{lstlisting}[language=Python, caption=Python example]
+import numpy as np
+    
+def incmatrix(genl1,genl2):
+    m = len(genl1)
+    n = len(genl2)
+    M = None #to become the incidence matrix
+    VT = np.zeros((n*m,1), int)  #dummy variable
+    
+    #compute the bitwise xor matrix
+    M1 = bitxormatrix(genl1)
+    M2 = np.triu(bitxormatrix(genl2),1) 
+
+    for i in range(m-1):
+        for j in range(i+1, m):
+            [r,c] = np.where(M2 == M1[i,j])
+            for k in range(len(r)):
+                VT[(i)*n + r[k]] = 1;
+                VT[(i)*n + c[k]] = 1;
+                VT[(j)*n + r[k]] = 1;
+                VT[(j)*n + c[k]] = 1;
+                
+                if M is None:
+                    M = np.copy(VT)
+                else:
+                    M = np.concatenate((M, VT), 1)
+                
+                VT = np.zeros((n*m,1), int)
+    
+    return M
+\end{lstlisting}
+
+
+\subsection{Script de data aumentation}
+
+We did some experiments \ldots
+
+\begin{lstlisting}[language=Python, caption=Python example]
+import numpy as np
+    
+def incmatrix(genl1,genl2):
+    m = len(genl1)
+    n = len(genl2)
+    M = None #to become the incidence matrix
+    VT = np.zeros((n*m,1), int)  #dummy variable
+    
+    #compute the bitwise xor matrix
+    M1 = bitxormatrix(genl1)
+    M2 = np.triu(bitxormatrix(genl2),1) 
+
+    for i in range(m-1):
+        for j in range(i+1, m):
+            [r,c] = np.where(M2 == M1[i,j])
+            for k in range(len(r)):
+                VT[(i)*n + r[k]] = 1;
+                VT[(i)*n + c[k]] = 1;
+                VT[(j)*n + r[k]] = 1;
+                VT[(j)*n + c[k]] = 1;
+                
+                if M is None:
+                    M = np.copy(VT)
+                else:
+                    M = np.concatenate((M, VT), 1)
+                
+                VT = np.zeros((n*m,1), int)
+    
+    return M
+\end{lstlisting}
+
+\pagebreak
+
+\section{Experimentando en python}
+
+From our experiments we \cite{10038280} can conclude that \ldots
 
 \pagebreak
 
 \section{Conclusiones}
 
-From our experiments we can conclude that \ldots
+Estudios tempranos de Inteligencia Artificial buscaban duplicar los pensamientos humanos, pero ahora los estudios recientes muestran la tendencia en replicar el resultado y las computadoras actuan como sistemas expertos.\\
 
+Las computadoras son dispositivos simbolicos capaces de manipular cualquier tipo de simbolos siendo los numeros una clase importante, pero las computadoras son más generales que eso. Sabemos de la generalidad de la computación desde los tiempos de Alan Touring en los 1930's y se tienen intuiciones que Babbage tuvo también estudios que fueron afirmados por Ada Lovelace, en 1842 Ada Lovelace escribió sobre la ingenieria analitica de Babbage que buscaba unir el mundo mecanico con el mundo de las cosas abstractas, en la psicologia moderna es llamado The physical symbol system hypothesis y son las bases en que la Inteligencia Artificial funciona.\\
+
+La Inteligencia Artificial como ciencia emplea el uso de computadoras para procesar conocimientos simbolicos usando metodos de inferencias logicas, en otras palabras, nos referimos a inferencia y no calculos que se piensa en el sentido tradicional, hablamos de conocimiento y no numeros como en la forma tradicional.\\
+Al poner conocimiento en programas computacionales que para los humanos nos es fácil o a veces un reto intelectual y el conocimiento que le pasamos es representativo en cierta forma particular.\\
+
+Por otra parte, los sistemas expertos basados en conocimientos son aplicables en cualquier  área en que sea especializado el conocimiento y sea rutinario la toma de desiciones, estrategias para resolver problemas, diagnosticos, .. etc.\\
+Siendo de gran ayuda en un gran rango de aplicaciones, el \textbf{conocimiento medico}, en clasificación de un experto, puede estar reflejado con el funcionamiento de una red neuronal.\\
+
+Para algun diagnostico médico ó segmentadores más fáciles, pero igual de complicados como la segmentación en imágenes para la creación de sistemas autonomos.\\
+
+Programas que se puedan ejecutar en cualquier computadora o dispositivo que permita la ejecución de código multiplataforma como python ó C++, que tienen capacidades altas de manipulación simbolica, la toma de desiciones es primordial en una inteligencia basada en conocimiento y esa manipulación simbolica es necesaria.
+
+\pagebreak
 \bibliographystyle{abbrv}
-% \bibliography{references}  % need to put bibtex references in references.bib 
+\bibliography{referencias}  % need to put bibtex references in references.bib 
 \end{document}

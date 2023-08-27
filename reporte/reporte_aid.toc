@@ -1,7 +1,17 @@
 \babel@toc {spanish}{}\relax 
 \babel@toc {spanish}{}\relax 
-\contentsline {section}{\numberline {1}Sección 1}{2}{section.1}%
-\contentsline {section}{\numberline {2}Sección 2}{3}{section.2}%
-\contentsline {section}{\numberline {3}Sección 3}{4}{section.3}%
-\contentsline {section}{\numberline {4}Sección 4}{5}{section.4}%
-\contentsline {section}{\numberline {5}Conclusiones}{6}{section.5}%
+\contentsline {section}{\numberline {1}Introducción}{3}{section.1}%
+\contentsline {section}{\numberline {2}Resultados}{7}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Umbralado con el método de Otsu}{7}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Superpixels}{7}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}K-means}{7}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Descripción con rasgos de forma}{7}{subsection.2.4}%
+\contentsline {subsubsection}{\numberline {2.4.1}Área y perímetro}{8}{subsubsection.2.4.1}%
+\contentsline {subsubsection}{\numberline {2.4.2}Rasgos basados en esqueleto}{8}{subsubsection.2.4.2}%
+\contentsline {subsubsection}{\numberline {2.4.3}Momentos invariantes}{8}{subsubsection.2.4.3}%
+\contentsline {section}{\numberline {3}Clasificación de objetos}{9}{section.3}%
+\contentsline {section}{\numberline {4}Apendice}{10}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Script de rasgos}{10}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Script de data aumentation}{10}{subsection.4.2}%
+\contentsline {section}{\numberline {5}Experimentando en python}{12}{section.5}%
+\contentsline {section}{\numberline {6}Conclusiones}{13}{section.6}%
