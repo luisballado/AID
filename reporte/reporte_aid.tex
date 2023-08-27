@@ -30,6 +30,39 @@
 
 \usepackage{smartdiagram}  
 
+\usepackage{url}
+
+\usepackage{etoolbox,refcount}
+\usepackage{multicol}
+
+\usepackage{graphicx}
+\usepackage{subcaption}
+
+\newcounter{countitems}
+\newcounter{nextitemizecount}
+\newcommand{\setupcountitems}{%
+  \stepcounter{nextitemizecount}%
+  \setcounter{countitems}{0}%
+  \preto\item{\stepcounter{countitems}}%
+}
+\makeatletter
+\newcommand{\computecountitems}{%
+  \edef\@currentlabel{\number\c@countitems}%
+  \label{countitems@\number\numexpr\value{nextitemizecount}-1\relax}%
+}
+\newcommand{\nextitemizecount}{%
+  \getrefnumber{countitems@\number\c@nextitemizecount}%
+}
+\newcommand{\previtemizecount}{%
+  \getrefnumber{countitems@\number\numexpr\value{nextitemizecount}-1\relax}%
+}
+\makeatother    
+\newenvironment{AutoMultiColItemize}{%
+\ifnumcomp{\nextitemizecount}{>}{3}{\begin{multicols}{2}}{}%
+\setupcountitems\begin{itemize}}%
+{\end{itemize}%
+\unskip\computecountitems\ifnumcomp{\previtemizecount}{>}{3}{\end{multicols}}{}}
+
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
 \definecolor{codespurple}{rgb}{0.58,0,0.82}
@@ -76,169 +109,182 @@
   \end{figure}
     
   \vspace{1cm}
-         {\Huge \textbf{Reconocimiento de 8 herramientas}\par} 
-         \vspace{4cm}
-                {\Large Materia: Analisis de imagenes digitales \par} 
-                \vspace{3cm}
-                {\Large Catedratico: Dr. Wilfrido Gomez- \par} 
-                \vspace{1cm}
-                {\Large Alumno: Luis Alberto Ballado Aradias \par} 
-                
-                \vspace{3cm}
-                % Datum
-                       {\normalsize \today \par}
-                       
-    
-%  \pagebreak
+  {\Huge \textbf{Reconocimiento de 8 herramientas}\par} 
+  \vspace{4cm}
+  {\Large Materia: Análisis de Imágenes Digitales \par} 
+  \vspace{3cm}
+  {\Large Catedrático: Dr. Wilfrido Gómez-Flores \par} 
+  \vspace{1cm}
+  {\Large Alumno: Luis Alberto Ballado Aradias \par} 
   
+  \vspace{3cm}
+  % Datum
+  {\normalsize \today \par}
+  %  \pagebreak
 \end{titlepage}
 
 \tableofcontents{}
 
-\pagebreak
-\renewcommand\lstlistlistingname{List of Code}
+\renewcommand\lstlistlistingname{Lista de códigos}
 \lstlistoflistings
 
 \pagebreak
 
 \section{Introducción}
 
-El Análisis de imagenes digitales es un área fasinante que engloba muchas areas de las ciencias computacionales como Optimización y Aprendizaje de máquinas.\\
+El Análisis de Imágenes Digitales es un área fasinante que engloba muchas áreas de las ciencias computacionales como Optimización y Aprendizaje de máquinas.\\
 
-La imagen muestran las áreas dentro de los Análisis de imagenes
+El procesamiento de imágenes es un área multidiciplinaria que tiene como objetivo la manipulación y análisis de la información de una imagen en su parte más reducida conocida como pixel (picture element). Emergiendo una gran cantidad de técnicas y metodologías para el procesamiento y manipulación de imágenes.\\
 
-\smartdiagram[constellation diagram]{Análisis de imagenes, Reconocimiento de patrones, Optimización, Aprendizaje de máquinas, Procesamiento de imagenes}  
-   % here, the first element is placed at the center, and rest elements are places around that circle in the form of bubbles.  
-  
+Con el aumento de imágenes digitales, el procesamiento se ha vuelto necesario para aplicaciones en robótica, que la segmentación de imágenes puede facilitar la navegación para un robot \cite{smolyanskiy2017lowflying}, en el diagnóstico de cáncer ayuda a los médicos en dar diagnósticos más acertados \cite{10059977}. Asimismo, en la parte del entretenimiento con implementación de realidad aumentada \cite{8776989} .\\
 
-\begin{tikzpicture}
-  \tikzset{venn circle/.style={draw,circle,minimum width=6cm,fill=#1,opacity=0.4}}
+La detección y reconocimiento que son parte del área de visión por computadora, se han vuelto cada vez más utilizadas en aplicaciones como traductores de idiomas, análisis médicos, reconocimiento de rostros faciales.\\
 
-  \node [venn circle = red] (A) at (0,0) {$A$};
-  \node [venn circle = blue] (B) at (60:4cm) {$B$};
-  \node [venn circle = green] (C) at (0:4cm) {$C$};
-  \node[left] at (barycentric cs:A=1/2,B=1/2 ) {$A \cap B$}; 
-  \node[below] at (barycentric cs:A=1/2,C=1/2 ) {$A \cap C$};   
-  \node[right] at (barycentric cs:B=1/2,C=1/2 ) {$B \cap C$};   
-  \node[below] at (barycentric cs:A=1/3,B=1/3,C=1/3 ){$A \cap B \cap C$};
-\end{tikzpicture}  
+La detección y categorización de objetos con imágenes se descompone de los siguientes procesos:
 
-Las dificultades que se tienen dentro del procesamiento de imagenes digitales son la iluminación del ambiente, siendo los sensores perceptibles a la iluminancia al obtener la imagen.\\
+\begin{enumerate}
+\item \textbf{Adquisición de la imagen.-} La toma de fotografía se realiza mediante una cámara  que cuente con un sensor que puede ser de tipo CMOS, el sensor convierte la captura de la escena en señales digitales que son guardadas como una imagen.
+\item \textbf{Preprocesamiento.-} Mediante las técnicas existentes se busca el mejoramiento del contraste, realzar caracteristicas reduciendo el ruido, para hacer de la imagen lo más limpia posible para el paso de segmentación. 
+\item \textbf{Segmentación.-} Es la obtención de las regiones de interes que ayda a la extracción de caracteristicas.
+\item \textbf{Extracción de caracteristicas.-} Este proceso busca describir en cierta forma la imagen, describiendo valores de forma geometrica, colores, texturas y valores invariantes que se mantienen a pesar de rotaciones o escalamientos.
+\item \textbf{Clasificación.-} Asigna una clase a cada región de interes dentro de la imagen basados en los rasgos extraidos en el paso anterior.
+\end{enumerate}
+
+El proyecto busca el reconocimiento de ocho herramientas, aplicando las tecnicas vistas en clase con el uso de MATLAB.\\
+
+La figura \ref{etapas_basicas} muestran las etapas a desarrollar para el reconocimiento de las ocho herramientas.\\
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\textwidth]{etapas_basicas}
+\caption{Etapas básicas para el análisis de imágenes}
+\label{etapas_basicas}
+\end{figure}
 
 Una imagen $f(x,y)$ se puede modelar como el producto de dos componentes $f(x,y) = i(x,y),r(x,y)$, donde $0<i(x,y)<\infty$ es la componente de iluminación y $0<r(x,y)<1$ es la componente de reflactancia.\\
 
-Las operaciones aritméticas entre pixeles, la adición de la misma imagen por varias iteraciones reduce el ruido, sustracciones de dos imagenes de la misma toma detecta los cambios en los pixeles de la imagen, la multiplicación de imagenes para enmascarar zonas de interes.\\
+Las dificultades que se tienen dentro del procesamiento de imágenes digitales son la iluminación del ambiente, siendo los sensores perceptibles a la iluminancia al obtener la imagen.\\
 
-En la información que puede obtener de sus vecinos para detectar bordes a partir de distancias entre pixeles.
 
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.5\textwidth]{cinves}
-\caption{Example of a parametric plot ($\sin (x), \cos(x), x$)}
-\end{figure}
+%Las operaciones aritméticas entre pixeles, la adición de la misma imagen por varias iteraciones puede ayudar a la reducción de ruido, sustracciones de dos imágenes de la misma toma, puede ayudar a detectar movimientos, la multiplicación de imágenes para enmascarar zonas de interes.\\
 
-Euclidiana $D_{e}(p,q)=[((x-u)^{2}+(y-v)^{2})^{\frac{1}{2}}]$ \\
+%En la información que puede obtener de sus vecinos para detectar bordes a partir de distancias entre pixeles, siendo una de ellas la distancia euclidiana $D_{e}(p,q)=[((x-u)^{2}+(y-v)^{2})^{\frac{1}{2}}]$ \\
 
-cuatro vencindad usando los vecinos horizontales y verticales.\\
+%cuatro vencindad usando los vecinos horizontales y verticales.\\
 
-Suponga una imagen con k regiones disjuntas $R_{k}, k=1,2,..,k$ sea $R_{u}$ la unión de las k regiones y $(R_{u})^{c}$ su complemento.\\
+%Suponga una imagen con k regiones disjuntas $R_{k}, k=1,2,..,k$ sea $R_{u}$ la unión de las k regiones y $(R_{u})^{c}$ su complemento.\\
 
-Entonces los puntos en Ru representan el primer plano y los puntos de $(R_{u})^{c}$ representan el fondo.\\
+%Entonces los puntos en Ru representan el primer plano y los puntos de $(R_{u})^{c}$ representan el fondo.\\
 
-Contorno de una region\\
+%Contorno de una region\\
 
-El contorno de una región conexa es el conjunto de pixeles que tienen al menos en pixel vecino que corresponde al fondo en 4 ó 8 adyacencia.\\
+%El contorno de una región conexa es el conjunto de pixeles que tienen al menos en pixel vecino que corresponde al fondo en 4 ó 8 adyacencia.\\
 
-Buscar que tipo de etiquetado usa BWLABEL .- QUE ALGORITMO?\\
+%Buscar que tipo de etiquetado usa BWLABEL .- QUE ALGORITMO?\\
 
-Etiquetado de regiones conexas\\
+%Etiquetado de regiones conexas\\
 
-Data aumentation\\
+%Data aumentation\\
 
-Se usaron transformaciones geometricas para modificar la relaciòn espacial entre píxeles en una imágen.\\
+%Se usaron transformaciones geometricas para modificar la relaciòn espacial entre píxeles en una imágen.\\
 
-Usando propiedades que no deformen al objeto de interes.\\
+%Usando propiedades que no deformen al objeto de interes.\\
+
+%\begin{itemize}
+%\item Rotaciones
+%\item Traslaciones
+%\end{itemize}
+
+%Logrando crear imagenes artificiales.\\
+
+
+%El mejoramiento como manipulación de una imagen tal que el resultado sea más útil que la imagen original para una aplicación particular.\\
+
+%Una transformación de intensidad modifica el constraste.\\
+
+%Ecualización del histograma.\\
+
+%No se tuvo que ecualizar ni mejorar por CLAHE, pero es bueno saber la existencia de estas tecnicas para crear sistemas y filtros sofisticados.\\
+
+%Modo de degradación de una imagen.\\
+
+%No se hizo uso de ningun filtro, buscando evitar el efecto de deslavado y poder detectar los bordes lo más puros posibles.\\
+
+%Pero el filtro de difusión anisotrópico puede considerarse en la implementación.\\
+
+%Se probó la detección de bordes a partir del gradiente, pero la demaciada información nos afectaba en un ciclo para detectar bordes como canny edges.\\
+
+%EJEMPLO DE LAPLACIANO DEL GAUSIANO\\
+
+%Los beneficios de la aplicación del teorema de convolución nos ayuda en la reducción de la complejidad computacional, al solo considerar una multiplicación en  frecuencia.\\
+
+%Operadores morfologicos\\
+
+%Los elementos estructurantes, donde podemos encontrar la línea puede tener inclinaciones a ciertos grados y ser de 4 vecindad ó 8 vecindad.\\
+
+%La erosión y dilatación que son operadores muy buenos y fueron aplicados en el proyecto.
+
+%\begin{itemize}
+%\item Apertura: una erosión seguida de una dilatación $f o b = (f-b)+b$
+%\item Cerradorua: una dilatación, seguida de una erosión $f o b = (f+b)-b$
+%\end{itemize}
+
+%El borde de un conjunto A que contiene los píxeles del primer plano se obtiene como:
+
+%$B(A)=A-(A-b)$ donde A es la figura binaria y b el elemento estructurante.
+
+%Rellenado de orificios.\\
+
+%Un orificio es una región del fondo rodeado por un borde conexo de pixeles del primer plano.\\
+
+%Se efectua una reconstrucción por dilatación.\\
+
+\section{Adquisición de la imagen}
+
+La adquisición de las imagenes se realizo con las siguientes herramientas:
 
 \begin{itemize}
-\item Rotaciones
-\item Traslaciones
+\item Camara web Logitech C920s HD Pro 1080p webcam 
+\item Cubo para la toma de fotografias
 \end{itemize}
-
-Logrando crear imagenes artificiales.\\
-
-
-El mejoramiento como manipulación de una imagen tal que el resultado sea más útil que la imagen original para una aplicación particular.\\
-
-Una transformación de intensidad modifica el constraste.\\
-
-Ecualización del histograma.\\
-
-No se tuvo que ecualizar ni mejorar por CLAHE, pero es bueno saber la existencia de estas tecnicas para crear sistemas y filtros sofisticados.\\
-
-Modo de degradación de una imagen.\\
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.5\textwidth]{cinves}
-\caption{Modelos de ruido}
+\includegraphics[width=0.4\textwidth]{dimer1}
+\caption{Dimmer para el ajuste de la iluminación}
+\label{dimmer}
 \end{figure}
 
-No se hizo uso de ningun filtro, buscando evitar el efecto de deslavado y poder detectar los bordes lo más puros posibles.\\
+La camara web cuenta con un sensor de tipo CMOS de 2-mega pixel \cite{camara}, obteniendo imágenes limpias.\\
 
-Pero el filtro de difusión anisotrópico puede considerarse en la implementación.\\
+El objetivo es el reconocer automáticamente ocho herramientas
 
-Se probó la detección de bordes a partir del gradiente, pero la demaciada información nos afectaba en un ciclo para detectar bordes como canny edges.\\
+\begin{AutoMultiColItemize}
+\item Martillo
+\item Desarmador
+\item Cinta de medir
+\item Llave perica
+\item Tijeras
+\item Pinza de punta
+\item Pinza eléctricas
+\item Pinza de presión
+\end{AutoMultiColItemize}
 
-EJEMPLO DE LAPLACIANO DEL GAUSIANO\\
-
-Los beneficios de la aplicación del teorema de convolución nos ayuda en la reducción de la complejidad computacional, al solo considerar una multiplicación en  frecuencia.\\
-
-Operadores morfologicos\\
-
-Los elementos estructurantes, donde podemos encontrar la línea puede tener inclinaciones a ciertos grados y ser de 4 vecindad ó 8 vecindad.\\
-
-La erosión y dilatación que son operadores muy buenos y fueron aplicados en el proyecto.
-
-\begin{itemize}
-\item Apertura: una erosión seguida de una dilatación $f o b = (f-b)+b$
-\item Cerradorua: una dilatación, seguida de una erosión $f o b = (f+b)-b$
-\end{itemize}
-
-El borde de un conjunto A que contiene los píxeles del primer plano se obtiene como:
-
-$B(A)=A-(A-b)$ donde A es la figura binaria y b el elemento estructurante.
-
-Rellenado de orificios.\\
-
-Un orificio es una región del fondo rodeado por un borde conexo de pixeles del primer plano.\\
-
-Se efectua una reconstrucción por dilatación.\\
+La toma de fotografias se realiza en un ambiente controlado, ajustando la iluminación con un dimmer mostrado en la figura \ref{dimmer}.
 
 
 
-\pagebreak
 
-\section{Resultados}
 
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.5\textwidth]{cinves}
-\caption{Esqueletización}
-\end{figure}
+\section{Preprocesamiento}
 
-Dentro de las imagenes, la similitud de esqueletos entre la cinta, la llave perica, tijera, pinzas de punta y electrica que tienen formas similares.
+Al contar con imágenes de buena calidad, sólo se mejoro el contraste para reducir las sobras que las herramientas pueden formar y lograr obtener el contorno que representa más la imagen a reconocer.
 
-La mayoria de desarmadores no tiene ramas y tiene dos puntos finales, lo que lo confunde con una cinta al solo considerar las ramas y los puntos terminales se tiene una exactitud del 20\%, mientras al agregar el num de pixeles crece al 78\%, agregando más información como el área y perimetro la probabilidad de acierto crece aún más, presentandose valores arriba del 90\%.
+\section{Segmentación}
 
-\subsection{Umbralado con el método de Otsu}
+Se hacen pruebas con diversas tecnicas de segmentación, logrando obtener un resultado sencillo en base a operaciones morfologicas sencillas a partir de una imagen de detección de bordes
 
-Al afectarnos las partes cromadas, se busco crear una tecnica basica pero asu vez robusta a cambios de colores haciendo uso de bordes de canny.\\
-
-\subsection{Superpixels}
-
-\subsection{K-means}
-
-\subsection{Descripción con rasgos de forma}
+\section{Extracción de caracteristicas}
 
 El reconocimiento automático de objetos requiere calcular rasgos que describan propiedades fisicas de los objetos.\\
 
@@ -251,28 +297,27 @@ Un rasgo (atributo o caracteristica), es un valor numérico que cuantifica algun
 \item Basados en contorno, variaciones a lo largo del contorno.
 \end{itemize}
 
-\subsubsection{Área y perímetro}
+La extracción de caracteristicas
+
+\begin{enumerate}
+\item Rasgos geométricos básicos
+\item Momentos de Hue
+\item Cerco convexo
+\item Esqueletización
+\end{enumerate}
+
+\subsubsection{Geométricas básicas}
+
+\begin{itemize}
+\item Redondez
+\item Circularidad
+\item Compacidad
+\item Factor de forma
+\end{itemize}
 
 El área es el número total de pixeles que cubre la región del objeto.\\
 
 El perimetro es la longitud del contorno del objeto. El resultado depende del tipo de conectividad que pueda tener.
-
-Elementos básicos.
-\begin{itemize}
-\item Cerco convexo
-  \begin{itemize}
-  \item Solidez
-  \item Convexidad
-  \end{itemize}
-\item Esqueleto
-\item Geométricos
-  \begin{itemize}
-  \item Redondez
-  \item Circularidad
-  \item Compacidad
-  \item Factor de forma
-  \end{itemize}
-\end{itemize}
 
 \subsubsection{Rasgos basados en esqueleto}
 
@@ -282,13 +327,21 @@ Elementos básicos.
 \item Número de pixles
 \end{itemize}
 
-\subsubsection{Momentos invariantes}
+\subsubsection{Momentos invariantes Hue}
 
 Los momentos son proyecciones de una función sobre una base polinomial usados para medir la distribución de masa de un cuerpo.
 
-\pagebreak
+\subsubsection{Cerco convexo}
 
-\section{Clasificación de objetos}
+Los momentos son proyecciones de una función sobre una base polinomial usados para medir la distribución de masa de un cuerpo.
+
+\begin{itemize}
+\item Solidez
+\item Convexidad
+\end{itemize}
+
+\pagebreak
+\section{Clasificación}
 
 Capas del reconocimiento de objetos en imagenes.
 
@@ -327,6 +380,76 @@ La selección del algoritmo de clasificación debe tener las siguientes cualidad
 \end{itemize}
 
 Se elige el clasificador k-nn de vecinos más cercanos por su simpleza.
+
+\newpage
+\section{Resultados}
+
+\begin{figure}[h]
+  \centering
+  \begin{subfigure}{0.45\linewidth}
+    \includegraphics[width=\linewidth]{paso1} 
+    \caption{}
+    \label{fig:1a}
+  \end{subfigure}\hfill
+  \begin{subfigure}{0.45\linewidth}
+    \includegraphics[width=\linewidth]{paso2}
+    \caption{}
+    \label{fig:1a}
+  \end{subfigure}
+  
+  \begin{subfigure}{0.45\linewidth}
+    \includegraphics[width=\linewidth]{paso3}
+    \caption{}
+    \label{fig:1a}
+  \end{subfigure}\hfill
+  \begin{subfigure}{0.45\linewidth}
+    \includegraphics[width=\linewidth]{paso4}
+    \caption{}
+    \label{fig:1a}
+  \end{subfigure}
+  \caption{My composed figure}
+  \label{fig:1}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \begin{subfigure}{0.45\linewidth}
+    \includegraphics[width=\linewidth]{paso5} 
+    \caption{}
+    \label{fig:1a}
+  \end{subfigure}\hfill
+  \begin{subfigure}{0.45\linewidth}
+    \includegraphics[width=\linewidth]{paso6}
+    \caption{}
+    \label{fig:1a}
+  \end{subfigure}
+  
+  \begin{subfigure}{0.45\linewidth}
+    \includegraphics[width=\linewidth]{paso9}
+    \caption{}
+    \label{fig:1a}
+  \end{subfigure}\hfill
+  \begin{subfigure}{0.45\linewidth}
+    \includegraphics[width=\linewidth]{paso10}
+    \caption{}
+    \label{fig:1a}
+  \end{subfigure}
+  \caption{My composed figure}
+  \label{fig:1}
+\end{figure}
+
+
+Dentro de las imagenes, la similitud de esqueletos entre la cinta, la llave perica, tijera, pinzas de punta y electrica que tienen formas similares.
+
+La mayoria de desarmadores no tiene ramas y tiene dos puntos finales, lo que lo confunde con una cinta al solo considerar las ramas y los puntos terminales se tiene una exactitud del 20\%, mientras al agregar el num de pixeles crece al 78\%, agregando más información como el área y perimetro la probabilidad de acierto crece aún más, presentandose valores arriba del 90\%.
+\pagebreak
+\subsection{Umbralado con el método de Otsu}
+
+Al afectarnos las partes cromadas, se busco crear una tecnica basica pero asu vez robusta a cambios de colores haciendo uso de bordes de canny.\\
+
+\subsection{Superpixels}
+
+\subsection{K-means}
 
 \pagebreak
 
@@ -409,7 +532,7 @@ def incmatrix(genl1,genl2):
 
 \section{Experimentando en python}
 
-From our experiments we \cite{10038280} can conclude that \ldots
+From our experiments we can conclude that \ldots
 
 \pagebreak
 

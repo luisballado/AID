@@ -1,9 +1,28 @@
 \begin{thebibliography}{1}
 
-\bibitem{10038280}
-B.~Zhou, H.~Xu, and S.~Shen.
-\newblock Racer: Rapid collaborative exploration with a decentralized multi-uav
-  system.
-\newblock {\em IEEE Transactions on Robotics}, 39(3):1816--1835, 2023.
+\bibitem{8776989}
+R.~Aggarwal and A.~Singhal.
+\newblock Augmented reality and its effect on our life.
+\newblock In {\em 2019 9th International Conference on Cloud Computing, Data
+  Science and Engineering (Confluence)}, pages 510--515, 2019.
+
+\bibitem{camara}
+CDW.
+\newblock {logitech c920s HD}.
+\newblock
+  \url{https://www.cdw.com/product/logitech-hd-pro-webcam-c920s-webcam/5479466},
+  2023.
+\newblock [Online; accessed 27-Agust-2023].
+
+\bibitem{10059977}
+M.~N.~R. Devi, A.~Kumar, G.~Swetha, U.~S. Chavan, and V.~M. Davasam.
+\newblock Cancer detection using image processing and machine learning.
+\newblock In {\em 2022 International Conference on Artificial Intelligence and
+  Data Engineering (AIDE)}, pages 96--100, 2022.
+
+\bibitem{smolyanskiy2017lowflying}
+N.~Smolyanskiy, A.~Kamenev, J.~Smith, and S.~Birchfield.
+\newblock Toward low-flying autonomous mav trail navigation using deep neural
+  networks for environmental awareness, 2017.
 
 \end{thebibliography}

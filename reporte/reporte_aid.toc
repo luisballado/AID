@@ -1,17 +1,21 @@
 \babel@toc {spanish}{}\relax 
 \babel@toc {spanish}{}\relax 
-\contentsline {section}{\numberline {1}Introducción}{3}{section.1}%
-\contentsline {section}{\numberline {2}Resultados}{7}{section.2}%
-\contentsline {subsection}{\numberline {2.1}Umbralado con el método de Otsu}{7}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}Superpixels}{7}{subsection.2.2}%
-\contentsline {subsection}{\numberline {2.3}K-means}{7}{subsection.2.3}%
-\contentsline {subsection}{\numberline {2.4}Descripción con rasgos de forma}{7}{subsection.2.4}%
-\contentsline {subsubsection}{\numberline {2.4.1}Área y perímetro}{8}{subsubsection.2.4.1}%
-\contentsline {subsubsection}{\numberline {2.4.2}Rasgos basados en esqueleto}{8}{subsubsection.2.4.2}%
-\contentsline {subsubsection}{\numberline {2.4.3}Momentos invariantes}{8}{subsubsection.2.4.3}%
-\contentsline {section}{\numberline {3}Clasificación de objetos}{9}{section.3}%
-\contentsline {section}{\numberline {4}Apendice}{10}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Script de rasgos}{10}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Script de data aumentation}{10}{subsection.4.2}%
-\contentsline {section}{\numberline {5}Experimentando en python}{12}{section.5}%
-\contentsline {section}{\numberline {6}Conclusiones}{13}{section.6}%
+\contentsline {section}{\numberline {1}Introducción}{2}{section.1}%
+\contentsline {section}{\numberline {2}Adquisición de la imagen}{3}{section.2}%
+\contentsline {section}{\numberline {3}Preprocesamiento}{4}{section.3}%
+\contentsline {section}{\numberline {4}Segmentación}{4}{section.4}%
+\contentsline {section}{\numberline {5}Extracción de caracteristicas}{4}{section.5}%
+\contentsline {subsubsection}{\numberline {5.0.1}Geométricas básicas}{5}{subsubsection.5.0.1}%
+\contentsline {subsubsection}{\numberline {5.0.2}Rasgos basados en esqueleto}{5}{subsubsection.5.0.2}%
+\contentsline {subsubsection}{\numberline {5.0.3}Momentos invariantes Hue}{5}{subsubsection.5.0.3}%
+\contentsline {subsubsection}{\numberline {5.0.4}Cerco convexo}{5}{subsubsection.5.0.4}%
+\contentsline {section}{\numberline {6}Clasificación}{6}{section.6}%
+\contentsline {section}{\numberline {7}Resultados}{7}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Umbralado con el método de Otsu}{8}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Superpixels}{8}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}K-means}{8}{subsection.7.3}%
+\contentsline {section}{\numberline {8}Apendice}{9}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Script de rasgos}{9}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}Script de data aumentation}{9}{subsection.8.2}%
+\contentsline {section}{\numberline {9}Experimentando en python}{11}{section.9}%
+\contentsline {section}{\numberline {10}Conclusiones}{12}{section.10}%
