@@ -1,9 +1,9 @@
 \babel@toc {spanish}{}\relax 
 \beamer@sectionintoc {1}{Conjunto de imagenes}{2}{0}{1}
-\beamer@sectionintoc {2}{Segmentación}{4}{0}{2}
-\beamer@sectionintoc {3}{Abstracción de caracteristicas}{10}{0}{3}
-\beamer@sectionintoc {4}{Clasificador K-nn}{15}{0}{4}
-\beamer@sectionintoc {5}{Resultados}{18}{0}{5}
-\beamer@sectionintoc {6}{Script de Data Aumentation}{23}{0}{6}
-\beamer@sectionintoc {7}{Script de Obtención de rasgos}{25}{0}{7}
-\beamer@sectionintoc {8}{Conclusiones}{28}{0}{8}
+\beamer@sectionintoc {2}{Segmentación}{5}{0}{2}
+\beamer@sectionintoc {3}{Abstracción de caracteristicas}{11}{0}{3}
+\beamer@sectionintoc {4}{Clasificador K-nn}{16}{0}{4}
+\beamer@sectionintoc {5}{Resultados}{19}{0}{5}
+\beamer@sectionintoc {6}{Script de Data Aumentation}{24}{0}{6}
+\beamer@sectionintoc {7}{Script de Obtención de rasgos}{26}{0}{7}
+\beamer@sectionintoc {8}{Conclusiones}{29}{0}{8}
