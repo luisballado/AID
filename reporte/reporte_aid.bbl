@@ -20,6 +20,14 @@ M.~N.~R. Devi, A.~Kumar, G.~Swetha, U.~S. Chavan, and V.~M. Davasam.
 \newblock In {\em 2022 International Conference on Artificial Intelligence and
   Data Engineering (AIDE)}, pages 96--100, 2022.
 
+\bibitem{canny}
+MatLab.
+\newblock {edge}.
+\newblock
+  \url{https://la.mathworks.com/help/images/ref/edge.html#buo5g3w-1-threshold},
+  2023.
+\newblock [Online; accessed 27-Agust-2023].
+
 \bibitem{smolyanskiy2017lowflying}
 N.~Smolyanskiy, A.~Kamenev, J.~Smith, and S.~Birchfield.
 \newblock Toward low-flying autonomous mav trail navigation using deep neural

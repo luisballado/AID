@@ -40,7 +40,7 @@
 \usepackage{graphicx}
 \usepackage{subcaption}
 \usepackage{matlab-prettifier}
-
+\usepackage{chemmacros}
 \renewcommand\lstlistingname{Código}
 \renewcommand\lstlistlistingname{Códigos}
 \newcounter{countitems}
@@ -130,16 +130,19 @@
 
 \tableofcontents{}
 
+\pagebreak
 \renewcommand\lstlistlistingname{Lista de códigos}
 \lstlistoflistings
 
-\pagebreak
+\renewcommand{\listfigurename}{Lista de figuras}
+\listoffigures
 
+\pagebreak
 \section{Introducción}
 
 El Análisis de Imágenes Digitales es un área fascinante que engloba muchas áreas de las ciencias computacionales como Optimización y Aprendizaje de máquinas.\\
 
-El procesamiento de imágenes es un área multidiciplinaria que tiene como objetivo la manipulación y análisis de la información de una imagen en su parte más reducida conocida como pixel (picture element). Emergiendo una gran cantidad de técnicas y metodologías para el procesamiento y manipulación de imágenes.\\
+El procesamiento de imágenes es un área multidisciplinaria que tiene como objetivo la manipulación y análisis de la información de una imagen en su parte más reducida conocida como pixel (picture element). Emergiendo una gran cantidad de técnicas y metodologías para el procesamiento y manipulación de imágenes.\\
 
 Con el aumento de imágenes digitales, el procesamiento se ha vuelto necesario para aplicaciones como en robótica, que la segmentación de imágenes puede facilitar la navegación para un robot aéreo \cite{smolyanskiy2017lowflying}, en el diagnóstico de cáncer ayuda a los médicos en dar diagnósticos más acertados \cite{10059977}. Asimismo, en la parte del entretenimiento con implementación de realidad aumentada \cite{8776989} .\\
 
@@ -150,8 +153,8 @@ La detección y categorización de objetos con imágenes se descompone de los si
 \begin{enumerate}
 \item \textbf{Adquisición de la imagen.-} La toma de fotografía se realiza mediante una cámara  que cuente con un sensor que puede ser de tipo CMOS, el sensor convierte la captura de la escena en señales digitales que son guardadas como una imagen.
 \item \textbf{Preprocesamiento.-} Mediante las técnicas existentes se busca el mejoramiento del contraste, realzar características reduciendo el ruido, para hacer de la imagen lo más limpia posible para el paso de segmentación. 
-\item \textbf{Segmentación.-} Es la obtención de las regiones de interés que ayda a la extracción de características.
-\item \textbf{Extracción de características.-} Éste proceso busca describir en cierta forma la imagen, describiendo valores de forma geometrica, colores, texturas y valores invariantes que se mantienen a pesar de rotaciones o escalamientos.
+\item \textbf{Segmentación.-} Es la obtención de las regiones de interés que ayuda a la extracción de características. Ésta imagen binaria debe tomar la silueta de la figura lo más aproximada posible.
+\item \textbf{Extracción de características.-} Éste proceso busca describir en cierta forma la imagen, describiendo valores de forma geométrica, colores, texturas y valores invariantes que se mantienen a pesar de rotaciones o escalamientos.
 \item \textbf{Clasificación.-} Asigna una clase a cada región de interés dentro de la imagen basados en los rasgos extraidos en el paso anterior.
 \end{enumerate}
 
@@ -197,12 +200,12 @@ Las dificultades que se tienen dentro del procesamiento de imágenes digitales s
 
 \section{Adquisición de la imagen}
 
-La adquisición de las imágenes se realizo con las siguientes herramientas:
+La adquisición de las imágenes se realizó con las siguientes herramientas:
 
 \begin{itemize}
-\item Camara web Logitech C920s HD Pro 1080p webcam 
-\item Cubo para la toma de fotografías
-\item Control de iluminación
+\item Cámara web Logitech C920s HD Pro 1080p webcam 
+\item Cubo para la toma de fotografías marca Puluz, ver figura \ref{cubo}
+\item Control de iluminación dimmer, ver figura \ref{dimmer}
 \end{itemize}
 
 \begin{figure}[ht]
@@ -231,28 +234,28 @@ La toma de fotografías se realiza en un ambiente controlado como se muestra en 
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.4\textwidth]{cinves}
+\includegraphics[width=0.6\textwidth]{cubo}
 \caption{Cubo para la adquisición de imágenes.}
 \label{cubo}
 \end{figure}
 
-Se usaron transformaciones geométricas para modificar la relación espacial entre píxeles en una imágen, usando propiedades que no deformen al objeto de interés como:
+Se usaron transformaciones geométricas para modificar la relación espacial entre píxeles en una imagen, usando propiedades que no deformen al objeto de interés como:
 
 \begin{itemize}
 \item Rotaciones
 \item Traslaciones
 \end{itemize}
 
-Logrando crear imágenes artificiales, de modo tal que sirvan para el aumento del conjunto de imágenes.\\
+Logrando crear imágenes artificiales, de manera que sirvan para el aumento del conjunto de imágenes.\\
 
 \pagebreak
 \section{Preprocesamiento}
 
 Al contar con imágenes de buena calidad, solo se mejoró el contraste para reducir las sombras que las herramientas pueden formar y lograr obtener el contorno que representa más la imagen a reconocer.\\
 
-El mejoramiento es la manipulación de una imagen, tal que el resultado sea más útil que la imagen original para una aplicación en particular.\\
+El mejoramiento es la manipulación de una imagen, de tal forma que el resultado sea más útil que la imagen original para una aplicación en particular.\\
 
-Una transformación de intensidad nos ayuda a modificar el constraste. Dentro del proyecto se aplicó una transformación de intensidad con un factor de 1.5.\\
+Una transformación de intensidad nos ayuda a modificar el constraste. Dentro del proyecto se aplicó una transformación de intensidad con un escalar de 1.5, para algunas imágenes más obscuras el valor de 2 resulta mejor para la detección de bordes más cercanos al objeto.\\
 
 \begin{figure}[ht]%
     \centering
@@ -274,7 +277,7 @@ A partir de la imagen original pasada a double\footnote{se hace un cambio de est
   img_ajustada = original_gris * factor_brillo;
 \end{lstlisting}
 
-A pesar de que los objetos en su mayoria poseen partes cromadas, se logran contrastar con el fondo original blanco. Logrando apreciar mejor los objetos, este paso es de gran ayuda. Siendo el factor de brillo un atributo dentro de la función de segmentación.
+A pesar de que los objetos en su mayoría poseen partes cromadas, se logran contrastar con el fondo original blanco. Logrando apreciar mejor los objetos, este paso es de gran ayuda. Siendo el factor de brillo un atributo dentro de la función de segmentación.
 %Ecualización del histograma.\\
 
 %No se tuvo que ecualizar ni mejorar por CLAHE, pero es bueno saber la existencia de estas técnicas para crear sistemas y filtros sofisticados.\\
@@ -287,14 +290,14 @@ A pesar de que los objetos en su mayoria poseen partes cromadas, se logran contr
 \pagebreak
 \section{Segmentación}
 
-Se hacen pruebas con diversas técnicas de segmentación, optando por un resultado sencillo en base a operaciones morfológicas en base de una imagen de detección de bordes a partir de canny edges.\\
+Se hacen pruebas con diversas técnicas de segmentación, optando por un resultado sencillo con uso de operaciones morfológicas en base a una imagen de detección de bordes con Canny Edges.\\
+
+De igual forma se exploraron otras técnicas que se listan a continuación.\\
 
 \begin{itemize}
-\item Método de umbralado global método de Otsu
+\item Método de umbralado global \textbf{Método de Otsu}
 
-  Éste método sería el indicado, pero las partes color cromo en los objetos afecta en el umbralado de la imagen, haciendo perder rasgos representativos de los objetos como las puntas en la tijera, las partes metálicas del desarmador o de las pinzas. \\
-
-  La figura \ref{otsu} ilustra el resultado despues de aplicar éste método.
+  Éste método sería el indicado, pero las partes color cromo en los objetos afecta en el umbralado de la imagen, haciendo perder rasgos representativos de los objetos como las puntas en la tijera, las partes metálicas del desarmador o de las pinzas. La figura \ref{otsu} ilustra el resultado después de aplicar éste método (Otsu).
   
   \begin{figure}[ht]%
     \centering
@@ -305,26 +308,26 @@ Se hacen pruebas con diversas técnicas de segmentación, optando por un resulta
     \label{otsu}%
 \end{figure}
   
-\item Método de segmentación con k-means
+\item Método de segmentación con \textbf{K-Means} (K-Means clustering)
 
-  A partir de una simple caracteristica de crear dos grupos, el fondo y los objetos. Éste método sirve igual de bien que el método de otso, pero en nuestro problema el color cromo de los objetos hacia que los valores cromo formaran parte del conjunto del fondo.\\
-
-  La figura \ref{kmeans} ilustra el resultado despues de aplicar éste método.
+  El algoritmo k-means es una técnica de agrupamiento que divide un conjunto de datos en k grupos o clusters. Los datos se agrupan de modo que los puntos de un grupo sean más similares que los puntos de otros grupos.\\
+  
+  A partir de una simple idea de crear dos grupos, el fondo y los objetos. Éste método sirve igual de bien que el Método de Otsu, pero en nuestro caso, el problema con el color cromo de los objetos hace que los valores cromo formen parte del conjunto del fondo. La figura \ref{kmeans} ilustra el resultado después de aplicar éste método (K-Means clustering).
   
   \begin{figure}[ht]%
     \centering
-    \subfloat[\centering kmeans con dos clases]{{\includegraphics[width=7cm]{kmeans2} }}%
+    \subfloat[\centering K-Means con dos clases]{{\includegraphics[width=7cm]{kmeans2} }}%
     \qquad
-    \subfloat[\centering kmeans con tres clases]{{\includegraphics[width=7cm]{kmeans3} }}%
-    \caption{Umbralado con k-means.}%
+    \subfloat[\centering K-Means con tres clases]{{\includegraphics[width=7cm]{kmeans3} }}%
+    \caption{Umbralado con K-Means.}%
     \label{kmeans}%
 \end{figure}
   
-\item Visualización de la entropia
+\item Visualización de la \textbf{Entropía}
 
-  Con una segmentación mediante el método de entropía se puede obtener la información de la de los objetos, lamentablemente al estar con mucha información la descarte en el proyecto. Pero pensandolo bien, se puede hacer algun filtro para quedarse solo con los pixeles blancos con algun método como lógica difusa.
-  
-  La figura \ref{entropia} ilustra el resultado despues de aplicar éste método.
+  Con una segmentación mediante el método de entropía se puede obtener la información de la presencia de los objetos, lamentablemente al estar con mucha información no fué utilizada en el proyecto. Pero replanteandolo nuevamenta, se puede hacer algun filtro para quedarse solo con los píxeles blancos con algun método como lógica difusa. La figura \ref{entropia} ilustra el resultado después de aplicar éste método (Entropía).
+
+  \vspace{1cm}
   
   \begin{figure}[ht]%
     \centering
@@ -335,11 +338,21 @@ Se hacen pruebas con diversas técnicas de segmentación, optando por un resulta
     \label{entropia}%
   \end{figure}
 
-\item Detección de bordes con Canny Edges\\
+\item Detección de bordes \textbf{Canny Edges}\\
 
-  Al tener una representación limpia de los objetos de interés, la detección de los objetos a partir de sus bordes es una buena opción para lidear con las piezas cromadas.
+  Al contar con una representación limpia de los objetos de interés, la detección de los objetos a partir de sus bordes es una buena opción para lidear con las piezas cromadas. La figura \ref{canny} ilustra el resultado después de aplicar éste método.\\
 
-  La figura \ref{canny} ilustra el resultado despues de aplicar éste método.
+  Probablemente sea el algoritmo para detección de bordes más usado para reconocer bordes en visión por computadora.\\
+
+  Usa las mejores propiedades del operador del gradiente y el operador laplaciano. Básicamente los pasos que sigue son los siguientes:
+
+  \begin{itemize}
+  \item Suaviza la imagen con un filtro gausiano 2D
+  \item Calcula el gradiente de la imagen usando un operador de sobel de 3x3, dando resultados de las derivadas para cada punto para el eje x y el eje y
+  \item A partir de esos valores se puede calcular la magnitud para cada píxel, así como su orientación
+  \item Se calcula el Laplaciano a lo largo de la dirección del gradiente
+  \item Se usan los cruces por cero en el Laplaciano para encontrar la ubicación del borde
+  \end{itemize}
   
   \begin{figure}[ht]%
     \centering
@@ -352,20 +365,30 @@ Se hacen pruebas con diversas técnicas de segmentación, optando por un resulta
   
 \end{itemize}
 
-Al considerar la última técnica con la obtención de los bordes, debemos cerrar la imagen con elementos estructurantes, donde podemos encontrar la línea puede tener inclinaciones a ciertos grados y ser de 4 vecindad ó 8 vecindad.\\
+En matlab, el filtro de \textbf{Canny Edges} detecta bordes buscando los máximos locales del gradiente de la imagen. Las funciones de borde utilizan la derivada de un filtro gaussiano para calcular el gradiente. Este método utiliza dos umbrales para detectar bordes fuertes y débiles e incluye bordes débiles en la salida si están asociados con bordes fuertes. Debido a que el método de Canny utiliza dos umbrales diferentes, es menos propenso a errores debido al ruido que otros métodos y es más probable que detecte bordes realmente débiles \cite{canny}.
+
+\begin{itemize}
+\item Sigma valor escalar que especifica la desviación estándar del filtro gaussiano. El valor predeterminado es sqrt(2).  automáticamente en función de sigma \cite{canny}.
+
+\item Umbral de sensibilidad es especificado como escalar numérico, la función en matlab ignora todos los bordes cuya intensidad no es mayor que threshold indicado, al no indicar un valor la función escoge los valores automáticamente \cite{canny}.
+\end{itemize}
+
+Al considerar la última técnica con la obtención de los bordes, debemos cerrar la imagen con elementos estructurantes, donde podemos encontrar la línea, ésta puede tomar valores de inclinacion a ciertos grados y ser de 4 ó 8 vecindad.\\
 
 \subsection{Operaciones morfológicas}
 
 La erosión y dilatación, operadores que fueron aplicados en el proyecto.
 
 \begin{itemize}
-\item Apertura: una erosión seguida de una dilatación $f o b = (f-b)+b$
-\item Cerradorua: una dilatación, seguida de una erosión $f o b = (f+b)-b$
+\item Apertura: una erosión seguida de una dilatación $f \circ b = (f \fminus b) \fplus b$
+\item Cerradorua: una dilatación, seguida de una erosión $f \bullet b = (f \fplus b) \fminus b$
 \end{itemize}
 
 El borde de un conjunto A que contiene los píxeles del primer plano se obtiene como:
 
-$B(A)=A-(A-b)$ donde A es la figura binaria y b el elemento estructurante.
+\[B(A) = A - (A \fminus b)\]
+
+donde A es la figura binaria y b el elemento estructurante.
 
 \subsection{Erosión y dilatación}
 
@@ -406,7 +429,7 @@ La extracción de características que se utilizaron en el proyecto son las sigu
 \begin{enumerate}
 \item Rasgos geométricos básicos
 \item Momentos de Hue
-\item Cerco convexo
+\item Cerco convexo 
 \item Esqueletización
 \end{enumerate}
 
@@ -423,7 +446,7 @@ Para el cálculo de rasgos geométricos básicos, se hace uso del área y perime
     \subfloat[\centering Tijera]{{\includegraphics[width=7cm]{tijera} }}%
     \qquad
     \subfloat[\centering Pinza de punta]{{\includegraphics[width=6.3cm]{ppunta} }}%
-    \caption{Imágenes segmentadas para obtención de gemétricas básicas.}%
+    \caption{Imágenes segmentadas para obtención de rasgos geométricos básicos.}%
     \label{entropia}%
 \end{figure}
 
@@ -437,7 +460,7 @@ Para el cálculo de rasgos geométricos básicos, se hace uso del área y perime
 \newpage
 \subsubsection{Rasgos basados en esqueleto}
 
-Otra generación de rasgos usada en el proyecto, son los valores por esqueletizar la imagen.
+Otra generación de rasgos usada en el proyecto, son los rasgos por esqueletizar la imagen.
 
 \begin{figure}[ht]%
     \centering
@@ -452,6 +475,8 @@ Otra generación de rasgos usada en el proyecto, son los valores por esqueletiza
 \item Puntos finales
 \item Ramas
 \item Número de pixles
+\item Área
+\item Perímetro
 \end{itemize}
 
 \subsubsection{Momentos invariantes Hue}
@@ -663,7 +688,7 @@ Estudios tempranos de Inteligencia Artificial buscaban duplicar los pensamientos
 
 Las computadoras son dispositivos simbolicos capaces de manipular cualquier tipo de simbolos siendo los numeros una clase importante, pero las computadoras son más generales que eso. Sabemos de la generalidad de la computación desde los tiempos de Alan Touring en los 1930's y se tienen intuiciones que Babbage tuvo también estudios que fueron afirmados por Ada Lovelace, en 1842 Ada Lovelace escribió sobre la ingenieria analitica de Babbage que buscaba unir el mundo mecanico con el mundo de las cosas abstractas, en la psicologia moderna es llamado The physical symbol system hypothesis y son las bases en que la Inteligencia Artificial funciona.\\
 
-La Inteligencia Artificial como ciencia emplea el uso de computadoras para procesar conocimientos simbolicos usando metodos de inferencias logicas, en otras palabras, nos referimos a inferencia y no calculos que se piensa en el sentido tradicional, hablamos de conocimiento y no numeros como en la forma tradicional.\\
+La Inteligencia Artificial como ciencia emplea el uso de computadoras para procesar conocimientos simbolicos usando métodos de inferencias logicas, en otras palabras, nos referimos a inferencia y no calculos que se piensa en el sentido tradicional, hablamos de conocimiento y no numeros como en la forma tradicional.\\
 Al poner conocimiento en programas computacionales que para los humanos nos es fácil o a veces un reto intelectual y el conocimiento que le pasamos es representativo en cierta forma particular.\\
 
 Por otra parte, los sistemas expertos basados en conocimientos son aplicables en cualquier  área en que sea especializado el conocimiento y sea rutinario la toma de desiciones, estrategias para resolver problemas, diagnosticos, .. etc.\\
@@ -677,7 +702,7 @@ Programas que se puedan ejecutar en cualquier computadora o dispositivo que perm
 
 \subsection{Script de rasgos}
 
-La obtención de rasgos se realizo mediante un script que itera entre todas las carpetas de las imágenes, haciendo rotaciones y traslaciones aleatorias, buscando mantener la imagen, por lo que se le añade un efecto para que el fondo se replique
+La obtención de rasgos se realizó mediante un script que itera entre todas las carpetas de las imágenes, haciendo rotaciones y traslaciones aleatorias, buscando mantener la imagen, por lo que se le añade un efecto para que el fondo se replique
 
 
 \begin{lstlisting}[style=Matlab-editor, caption=Script de rasgos]

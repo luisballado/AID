@@ -1,21 +1,21 @@
 \babel@toc {spanish}{}\relax 
 \babel@toc {spanish}{}\relax 
-\contentsline {section}{\numberline {1}Introducción}{2}{section.1}%
-\contentsline {section}{\numberline {2}Adquisición de la imagen}{3}{section.2}%
-\contentsline {section}{\numberline {3}Preprocesamiento}{5}{section.3}%
-\contentsline {section}{\numberline {4}Segmentación}{6}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Operaciones morfológicas}{8}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Erosión y dilatación}{8}{subsection.4.2}%
-\contentsline {subsection}{\numberline {4.3}Rellenado de orificios}{8}{subsection.4.3}%
-\contentsline {section}{\numberline {5}Extracción de características}{9}{section.5}%
-\contentsline {subsubsection}{\numberline {5.0.1}Geométricas básicas}{9}{subsubsection.5.0.1}%
-\contentsline {subsubsection}{\numberline {5.0.2}Rasgos basados en esqueleto}{10}{subsubsection.5.0.2}%
-\contentsline {subsubsection}{\numberline {5.0.3}Momentos invariantes Hue}{10}{subsubsection.5.0.3}%
-\contentsline {subsubsection}{\numberline {5.0.4}Cerco convexo}{11}{subsubsection.5.0.4}%
-\contentsline {section}{\numberline {6}Clasificación}{12}{section.6}%
-\contentsline {section}{\numberline {7}Resultados}{13}{section.7}%
-\contentsline {section}{\numberline {8}Conclusiones}{14}{section.8}%
-\contentsline {section}{\numberline {9}Apendice}{16}{section.9}%
-\contentsline {subsection}{\numberline {9.1}Script de rasgos}{16}{subsection.9.1}%
-\contentsline {subsection}{\numberline {9.2}Script de data aumentation}{17}{subsection.9.2}%
-\contentsline {section}{\numberline {10}Experimentando en python}{18}{section.10}%
+\contentsline {section}{\numberline {1}Introducción}{3}{section.1}%
+\contentsline {section}{\numberline {2}Adquisición de la imagen}{4}{section.2}%
+\contentsline {section}{\numberline {3}Preprocesamiento}{6}{section.3}%
+\contentsline {section}{\numberline {4}Segmentación}{7}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Operaciones morfológicas}{9}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Erosión y dilatación}{9}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Rellenado de orificios}{10}{subsection.4.3}%
+\contentsline {section}{\numberline {5}Extracción de características}{11}{section.5}%
+\contentsline {subsubsection}{\numberline {5.0.1}Geométricas básicas}{11}{subsubsection.5.0.1}%
+\contentsline {subsubsection}{\numberline {5.0.2}Rasgos basados en esqueleto}{12}{subsubsection.5.0.2}%
+\contentsline {subsubsection}{\numberline {5.0.3}Momentos invariantes Hue}{13}{subsubsection.5.0.3}%
+\contentsline {subsubsection}{\numberline {5.0.4}Cerco convexo}{13}{subsubsection.5.0.4}%
+\contentsline {section}{\numberline {6}Clasificación}{14}{section.6}%
+\contentsline {section}{\numberline {7}Resultados}{15}{section.7}%
+\contentsline {section}{\numberline {8}Conclusiones}{16}{section.8}%
+\contentsline {section}{\numberline {9}Apendice}{18}{section.9}%
+\contentsline {subsection}{\numberline {9.1}Script de rasgos}{18}{subsection.9.1}%
+\contentsline {subsection}{\numberline {9.2}Script de data aumentation}{19}{subsection.9.2}%
+\contentsline {section}{\numberline {10}Experimentando en python}{20}{section.10}%
