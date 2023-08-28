@@ -3,16 +3,19 @@
 \contentsline {section}{\numberline {1}Introducción}{2}{section.1}%
 \contentsline {section}{\numberline {2}Adquisición de la imagen}{3}{section.2}%
 \contentsline {section}{\numberline {3}Preprocesamiento}{5}{section.3}%
-\contentsline {section}{\numberline {4}Segmentación}{5}{section.4}%
-\contentsline {section}{\numberline {5}Extracción de caracteristicas}{6}{section.5}%
-\contentsline {subsubsection}{\numberline {5.0.1}Geométricas básicas}{6}{subsubsection.5.0.1}%
-\contentsline {subsubsection}{\numberline {5.0.2}Rasgos basados en esqueleto}{6}{subsubsection.5.0.2}%
-\contentsline {subsubsection}{\numberline {5.0.3}Momentos invariantes Hue}{6}{subsubsection.5.0.3}%
-\contentsline {subsubsection}{\numberline {5.0.4}Cerco convexo}{7}{subsubsection.5.0.4}%
-\contentsline {section}{\numberline {6}Clasificación}{8}{section.6}%
-\contentsline {section}{\numberline {7}Resultados}{9}{section.7}%
-\contentsline {section}{\numberline {8}Apendice}{10}{section.8}%
-\contentsline {subsection}{\numberline {8.1}Script de rasgos}{10}{subsection.8.1}%
-\contentsline {subsection}{\numberline {8.2}Script de data aumentation}{11}{subsection.8.2}%
-\contentsline {section}{\numberline {9}Experimentando en python}{12}{section.9}%
-\contentsline {section}{\numberline {10}Conclusiones}{14}{section.10}%
+\contentsline {section}{\numberline {4}Segmentación}{6}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Operaciones morfológicas}{8}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Erosión y dilatación}{8}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Rellenado de orificios}{8}{subsection.4.3}%
+\contentsline {section}{\numberline {5}Extracción de características}{9}{section.5}%
+\contentsline {subsubsection}{\numberline {5.0.1}Geométricas básicas}{9}{subsubsection.5.0.1}%
+\contentsline {subsubsection}{\numberline {5.0.2}Rasgos basados en esqueleto}{10}{subsubsection.5.0.2}%
+\contentsline {subsubsection}{\numberline {5.0.3}Momentos invariantes Hue}{10}{subsubsection.5.0.3}%
+\contentsline {subsubsection}{\numberline {5.0.4}Cerco convexo}{11}{subsubsection.5.0.4}%
+\contentsline {section}{\numberline {6}Clasificación}{12}{section.6}%
+\contentsline {section}{\numberline {7}Resultados}{13}{section.7}%
+\contentsline {section}{\numberline {8}Conclusiones}{14}{section.8}%
+\contentsline {section}{\numberline {9}Apendice}{15}{section.9}%
+\contentsline {subsection}{\numberline {9.1}Script de rasgos}{15}{subsection.9.1}%
+\contentsline {subsection}{\numberline {9.2}Script de data aumentation}{15}{subsection.9.2}%
+\contentsline {section}{\numberline {10}Experimentando en python}{17}{section.10}%
