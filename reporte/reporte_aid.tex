@@ -26,6 +26,7 @@
 
 \usepackage{listings}
 \usepackage{xcolor}
+
 \usepackage{tikz}
 
 \usepackage{smartdiagram}  
@@ -37,7 +38,7 @@
 
 \usepackage{graphicx}
 \usepackage{subcaption}
-
+\usepackage{matlab-prettifier}
 \newcounter{countitems}
 \newcounter{nextitemizecount}
 \newcommand{\setupcountitems}{%
@@ -176,41 +177,10 @@ Las dificultades que se tienen dentro del procesamiento de imágenes digitales s
 
 %Entonces los puntos en Ru representan el primer plano y los puntos de $(R_{u})^{c}$ representan el fondo.\\
 
-%Contorno de una region\\
-
-%El contorno de una región conexa es el conjunto de pixeles que tienen al menos en pixel vecino que corresponde al fondo en 4 ó 8 adyacencia.\\
-
-%Buscar que tipo de etiquetado usa BWLABEL .- QUE ALGORITMO?\\
-
-%Etiquetado de regiones conexas\\
-
-%Data aumentation\\
-
-%Se usaron transformaciones geometricas para modificar la relaciòn espacial entre píxeles en una imágen.\\
-
-%Usando propiedades que no deformen al objeto de interes.\\
-
-%\begin{itemize}
-%\item Rotaciones
-%\item Traslaciones
-%\end{itemize}
-
-%Logrando crear imagenes artificiales.\\
 
 
-%El mejoramiento como manipulación de una imagen tal que el resultado sea más útil que la imagen original para una aplicación particular.\\
 
-%Una transformación de intensidad modifica el constraste.\\
 
-%Ecualización del histograma.\\
-
-%No se tuvo que ecualizar ni mejorar por CLAHE, pero es bueno saber la existencia de estas tecnicas para crear sistemas y filtros sofisticados.\\
-
-%Modo de degradación de una imagen.\\
-
-%No se hizo uso de ningun filtro, buscando evitar el efecto de deslavado y poder detectar los bordes lo más puros posibles.\\
-
-%Pero el filtro de difusión anisotrópico puede considerarse en la implementación.\\
 
 %Se probó la detección de bordes a partir del gradiente, pero la demaciada información nos afectaba en un ciclo para detectar bordes como canny edges.\\
 
@@ -246,6 +216,7 @@ La adquisición de las imagenes se realizo con las siguientes herramientas:
 \begin{itemize}
 \item Camara web Logitech C920s HD Pro 1080p webcam 
 \item Cubo para la toma de fotografias
+\item Control de iluminación
 \end{itemize}
 
 \begin{figure}[h]
@@ -255,9 +226,9 @@ La adquisición de las imagenes se realizo con las siguientes herramientas:
 \label{dimmer}
 \end{figure}
 
-La camara web cuenta con un sensor de tipo CMOS de 2-mega pixel \cite{camara}, obteniendo imágenes limpias.\\
+La cámara web cuenta con un sensor de tipo CMOS de 2-mega pixel \cite{camara}, obteniendo imágenes limpias y muy bien contrastadas.\\
 
-El objetivo es el reconocer automáticamente ocho herramientas
+El objetivo del proyecto, es el reconocer automáticamente ocho herramientas que son:
 
 \begin{AutoMultiColItemize}
 \item Martillo
@@ -270,20 +241,59 @@ El objetivo es el reconocer automáticamente ocho herramientas
 \item Pinza de presión
 \end{AutoMultiColItemize}
 
-La toma de fotografias se realiza en un ambiente controlado, ajustando la iluminación con un dimmer mostrado en la figura \ref{dimmer}.
+La toma de fotografias se realiza en un ambiente controlado como se muestra en la figura \ref{cubo}, ajustando la iluminación con un dimmer mostrado en la figura \ref{dimmer}.
 
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.4\textwidth]{dimer1}
+\caption{Cubo para la adquisición de imágenes}
+\label{cubo}
+\end{figure}
 
+Se usaron transformaciones geométricas para modificar la relación espacial entre píxeles en una imágen.\\
 
+Usando propiedades que no deformen al objeto de interes como:
 
+\begin{itemize}
+\item Rotaciones
+\item Traslaciones
+\end{itemize}
 
+Logrando crear imágenes artificiales, de modo tal que sirvan para el aumento del conjunto de imágenes.\\
+
+\pagebreak
 \section{Preprocesamiento}
 
-Al contar con imágenes de buena calidad, sólo se mejoro el contraste para reducir las sobras que las herramientas pueden formar y lograr obtener el contorno que representa más la imagen a reconocer.
+Al contar con imágenes de buena calidad, sólo se mejoro el contraste para reducir las sombras que las herramientas pueden formar y lograr obtener el contorno que representa más la imagen a reconocer.\\
+
+El mejoramiento como manipulación de una imagen tal que el resultado sea más útil que la imagen original para una aplicación particular.\\
+
+Una transformación de intensidad modifica el constraste.\\
+
+Ecualización del histograma.\\
+
+No se tuvo que ecualizar ni mejorar por CLAHE, pero es bueno saber la existencia de estas tecnicas para crear sistemas y filtros sofisticados.\\
+
+Modo de degradación de una imagen.\\
+
+No se hizo uso de ningun filtro, buscando evitar el efecto de deslavado y poder detectar los bordes lo más puros posibles.\\
+
+Pero el filtro de difusión anisotrópico puede considerarse en la implementación.\\
 
 \section{Segmentación}
 
-Se hacen pruebas con diversas tecnicas de segmentación, logrando obtener un resultado sencillo en base a operaciones morfologicas sencillas a partir de una imagen de detección de bordes
+Se hacen pruebas con diversas técnicas de segmentación, optando por un resultado sencillo en base a operaciones morfologicas en base de una imagen de detección de bordes a partir de canny edges.\\
 
+Contorno de una región\\
+
+El contorno de una región conexa es el conjunto de pixeles que tienen al menos en pixel vecino que corresponde al fondo en 4 ó 8 adyacencia.\\
+
+Buscar que tipo de etiquetado usa BWLABEL .- QUE ALGORITMO?\\
+
+Etiquetado de regiones conexas\\
+
+
+\pagebreak
 \section{Extracción de caracteristicas}
 
 El reconocimiento automático de objetos requiere calcular rasgos que describan propiedades fisicas de los objetos.\\
@@ -297,7 +307,7 @@ Un rasgo (atributo o caracteristica), es un valor numérico que cuantifica algun
 \item Basados en contorno, variaciones a lo largo del contorno.
 \end{itemize}
 
-La extracción de caracteristicas
+La extracción de caracteristicas que se utilizaron en el proyecto son las siguientes:
 
 \begin{enumerate}
 \item Rasgos geométricos básicos
@@ -343,7 +353,7 @@ Los momentos son proyecciones de una función sobre una base polinomial usados p
 \pagebreak
 \section{Clasificación}
 
-Capas del reconocimiento de objetos en imagenes.
+Etapas del reconocimiento de objetos en imagenes.
 
 \begin{enumerate}
 \item Sensado.- Capturar la imagen.
@@ -443,52 +453,28 @@ Dentro de las imagenes, la similitud de esqueletos entre la cinta, la llave peri
 
 La mayoria de desarmadores no tiene ramas y tiene dos puntos finales, lo que lo confunde con una cinta al solo considerar las ramas y los puntos terminales se tiene una exactitud del 20\%, mientras al agregar el num de pixeles crece al 78\%, agregando más información como el área y perimetro la probabilidad de acierto crece aún más, presentandose valores arriba del 90\%.
 \pagebreak
-\subsection{Umbralado con el método de Otsu}
-
-Al afectarnos las partes cromadas, se busco crear una tecnica basica pero asu vez robusta a cambios de colores haciendo uso de bordes de canny.\\
-
-\subsection{Superpixels}
-
-\subsection{K-means}
-
-\pagebreak
 
 \section{Apendice}
 
 \subsection{Script de rasgos}
 
-We did some experiments \ldots
+La obtención de rasgos se realizo mediante un script que itera entre todas las carpetas de las imágenes, haciendo rotaciones y traslaciones aleatorias, buscando mantener la imagen, por lo que se le añade un efecto para que el fondo se replique
 
-\begin{lstlisting}[language=Python, caption=Python example]
-import numpy as np
-    
-def incmatrix(genl1,genl2):
-    m = len(genl1)
-    n = len(genl2)
-    M = None #to become the incidence matrix
-    VT = np.zeros((n*m,1), int)  #dummy variable
-    
-    #compute the bitwise xor matrix
-    M1 = bitxormatrix(genl1)
-    M2 = np.triu(bitxormatrix(genl2),1) 
 
-    for i in range(m-1):
-        for j in range(i+1, m):
-            [r,c] = np.where(M2 == M1[i,j])
-            for k in range(len(r)):
-                VT[(i)*n + r[k]] = 1;
-                VT[(i)*n + c[k]] = 1;
-                VT[(j)*n + r[k]] = 1;
-                VT[(j)*n + c[k]] = 1;
-                
-                if M is None:
-                    M = np.copy(VT)
-                else:
-                    M = np.concatenate((M, VT), 1)
-                
-                VT = np.zeros((n*m,1), int)
-    
-    return M
+\begin{lstlisting}[style=Matlab-editor, caption=Script de rasgos]
+%% Sample Matlab code
+!mv test.txt test2.txt
+A = [1, 2, 3;... foo
+     4, 5, 6];
+s = 'abcd';
+for k = 1:4
+  Disp(s(k)) % bar
+end
+%{
+create row vector x, then reverse it
+%}
+x = linspace(0,1,101);
+y = x(end:-1:1);
 \end{lstlisting}
 
 
@@ -496,7 +482,27 @@ def incmatrix(genl1,genl2):
 
 We did some experiments \ldots
 
-\begin{lstlisting}[language=Python, caption=Python example]
+\begin{lstlisting}[style=Matlab-editor, caption=Python example]
+%% Sample Matlab code
+!mv test.txt test2.txt
+A = [1, 2, 3;... foo
+     4, 5, 6];
+s = 'abcd';
+for k = 1:4
+  Disp(s(k)) % bar
+end
+%{
+create row vector x, then reverse it
+%}
+x = linspace(0,1,101);
+y = x(end:-1:1);
+\end{lstlisting}
+
+\pagebreak
+
+\section{Experimentando en python}
+
+\begin{lstlisting}[language=Python, caption=experimentación python]
 import numpy as np
     
 def incmatrix(genl1,genl2):
@@ -528,11 +534,37 @@ def incmatrix(genl1,genl2):
     return M
 \end{lstlisting}
 
-\pagebreak
+\begin{lstlisting}[language=Python, caption=Python example]
+import numpy as np
+    
+def incmatrix(genl1,genl2):
+    m = len(genl1)
+    n = len(genl2)
+    M = None #to become the incidence matrix
+    VT = np.zeros((n*m,1), int)  #dummy variable
+    
+    #compute the bitwise xor matrix
+    M1 = bitxormatrix(genl1)
+    M2 = np.triu(bitxormatrix(genl2),1) 
 
-\section{Experimentando en python}
-
-From our experiments we can conclude that \ldots
+    for i in range(m-1):
+        for j in range(i+1, m):
+            [r,c] = np.where(M2 == M1[i,j])
+            for k in range(len(r)):
+                VT[(i)*n + r[k]] = 1;
+                VT[(i)*n + c[k]] = 1;
+                VT[(j)*n + r[k]] = 1;
+                VT[(j)*n + c[k]] = 1;
+                
+                if M is None:
+                    M = np.copy(VT)
+                else:
+                    M = np.concatenate((M, VT), 1)
+                
+                VT = np.zeros((n*m,1), int)
+    
+    return M
+\end{lstlisting}
 
 \pagebreak
 
