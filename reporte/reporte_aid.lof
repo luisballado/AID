@@ -8,10 +8,10 @@
 \contentsline {figure}{\numberline {6}{\ignorespaces Umbralado con K-Means.\relax }}{8}{figure.caption.7}%
 \contentsline {figure}{\numberline {7}{\ignorespaces Umbralado con método de entropía.\relax }}{8}{figure.caption.8}%
 \contentsline {figure}{\numberline {8}{\ignorespaces Detección de bordes con canny edges.\relax }}{9}{figure.caption.9}%
-\contentsline {figure}{\numberline {9}{\ignorespaces Imágenes segmentadas para obtención de rasgos geométricos básicos.\relax }}{12}{figure.caption.10}%
+\contentsline {figure}{\numberline {9}{\ignorespaces Imágenes segmentadas para obtención de rasgos geométricos básicos.\relax }}{11}{figure.caption.10}%
 \contentsline {figure}{\numberline {10}{\ignorespaces Rasgos basados en esqueleto.\relax }}{12}{figure.caption.11}%
-\contentsline {figure}{\numberline {11}{\ignorespaces Rasgos cerco convexo.\relax }}{13}{figure.caption.12}%
-\contentsline {figure}{\numberline {12}{\ignorespaces Umbralado con método de entropía.\relax }}{13}{figure.caption.13}%
+\contentsline {figure}{\numberline {11}{\ignorespaces Ejemplo martillo cerco convexo.\relax }}{12}{figure.caption.12}%
+\contentsline {figure}{\numberline {12}{\ignorespaces Ejemplo llave perica cerco convexo.\relax }}{13}{figure.caption.13}%
 \contentsline {figure}{\numberline {13}{\ignorespaces Proceso de segmentado primera parte.\relax }}{15}{figure.caption.14}%
 \contentsline {figure}{\numberline {14}{\ignorespaces Proceso de segmentado última parte.\relax }}{16}{figure.caption.15}%
 \contentsline {figure}{\numberline {15}{\ignorespaces Imágenes diferentes fondos.\relax }}{17}{figure.caption.16}%

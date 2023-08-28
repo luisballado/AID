@@ -131,11 +131,11 @@
 \tableofcontents{}
 
 \pagebreak
-\renewcommand\lstlistlistingname{Lista de códigos}
-\lstlistoflistings
+%\renewcommand\lstlistlistingname{Lista de códigos}
+%\lstlistoflistings
 
-\renewcommand{\listfigurename}{Lista de figuras}
-\listoffigures
+%\renewcommand{\listfigurename}{Lista de figuras}
+%\listoffigures
 
 \pagebreak
 \section{Introducción}
@@ -243,7 +243,6 @@ Se usaron transformaciones geométricas para modificar la relación espacial ent
 
 \begin{itemize}
 \item Rotaciones
-\item Traslaciones
 \end{itemize}
 
 Logrando crear imágenes artificiales, de manera que sirvan para el aumento del conjunto de imágenes.\\
@@ -381,7 +380,7 @@ La erosión y dilatación, operadores que fueron aplicados en el proyecto.
 
 \begin{itemize}
 \item Apertura: una erosión seguida de una dilatación $f \circ b = (f \fminus b) \fplus b$
-\item Cerradorua: una dilatación, seguida de una erosión $f \bullet b = (f \fplus b) \fminus b$
+\item Cerradura: una dilatación, seguida de una erosión $f \bullet b = (f \fplus b) \fminus b$
 \end{itemize}
 
 El borde de un conjunto A que contiene los píxeles del primer plano se obtiene como:
@@ -409,8 +408,6 @@ Buscar que tipo de etiquetado usa BWLABEL .- QUE ALGORITMO?\\
 
 Etiquetado de regiones conexas\\
 
-
-\pagebreak
 \section{Extracción de características}
 
 El reconocimiento automático de objetos requiere calcular rasgos que describan propiedades fisicas de los objetos.\\
@@ -432,6 +429,9 @@ La extracción de características que se utilizaron en el proyecto son las sigu
 \item Cerco convexo 
 \item Esqueletización
 \end{enumerate}
+
+Se creó un script llamado \textbf{script\_rasgos.m} el cual itera dentro de la carpeta llamada data\_aumentation, la cual consiste en las imágenes del dataset. Al considerarse el número de las carpetas y si se desea crear una nueva clase, solo bastara con crear una nueva carpeta con el nombre de la nueva clase y poner las imágenes a extraer rasgos dentro de ella. Al final el escript cálcula los rasgos a partir de la opción que haya elegido el usuario y guardandola en una extensión .mat.
+
 
 \subsubsection{Geométricas básicas}
 
@@ -457,7 +457,6 @@ Para el cálculo de rasgos geométricos básicos, se hace uso del área y perime
 \item Factor de forma
 \end{AutoMultiColItemize}
 
-\newpage
 \subsubsection{Rasgos basados en esqueleto}
 
 Otra generación de rasgos usada en el proyecto, son los rasgos por esqueletizar la imagen.
@@ -492,16 +491,16 @@ Los momentos son proyecciones de una función sobre una base polinomial usados p
     \subfloat[\centering Imagen segmentada martillo]{{\includegraphics[width=4cm]{martillo} }}%
     \qquad
     \subfloat[\centering Cerco convexo martillo]{{\includegraphics[width=4cm]{cerco_convexo_martillo} }}%
-    \caption{Rasgos cerco convexo.}%
+    \caption{Ejemplo martillo cerco convexo.}%
     \label{entropia}%
 \end{figure}
 
 \begin{figure}[ht]%
     \centering
-    \subfloat[\centering Imagen original escala de grises]{{\includegraphics[width=6cm]{cerco_convexo_perica} }}%
+    \subfloat[\centering Imagen segmentada llave perica]{{\includegraphics[width=4cm]{perica} }}%
     \qquad
-    \subfloat[\centering Imagen después del método de entropía]{{\includegraphics[width=4cm]{perica} }}%
-    \caption{Umbralado con método de entropía.}%
+    \subfloat[\centering Cerco convexo llave perica]{{\includegraphics[width=6cm]{cerco_convexo_perica} }}%
+    \caption{Ejemplo llave perica cerco convexo.}%
     \label{entropia}%
 \end{figure}
 
@@ -525,7 +524,7 @@ Recordando las etapas del reconocimiento de objetos en imágenes.
 
 Obtener un vector de patrones.
 
-Para el proyecto se consideran ocho clases sindo representadas por los objetos siguientes:
+Para el proyecto se consideran ocho clases siendo representadas por los objetos siguientes:
 
 \begin{AutoMultiColItemize}
 \item Martillo
@@ -684,6 +683,16 @@ La mayoria de desarmadores no tiene ramas y tiene dos puntos finales, lo que lo 
 \newpage
 \section{Conclusiones}
 
+Uno de los desafios dentro del proyecto, fué el cómo lidiar con las partes cromadas dentro de un fondo claro como lo es el color blanco, usando técnicas de segmentación el objeto se perdia completamente en su forma particular que resultaria dificil el reconocimiento del objeto.\\
+
+Para salir del problema se opto en cambiar la estrategia al usar la tecnica de detección de bordes Canny Edges, la cuál nos permitió rescatar un poco la silueta de la imagen de interés.\\
+
+Una de las ideas de seguir esta estrategia es hacer que el reconocimiento sea invariable en el fondo de la imagen dentro del ambiente controlado. Se probarón los fondos con los siguientes colores azul, verde, melón, blanco y claro.\\
+
+Variando un poco el desempeño entre fondo y fondo. Esto debido a que la obtención de rasgos se realizo solo con el fondo blanco, es probable que al añadir más muestras con los diferentes fondos pueda cambiar el desempeño en la tarea de reconocimiento.\\
+
+Por otro lado, la creación del vector de caracteristicas al ser más robusto haciendo una versión hibrida entre los cuatro implementados.\\
+
 Estudios tempranos de Inteligencia Artificial buscaban duplicar los pensamientos humanos, pero ahora los estudios recientes muestran la tendencia en replicar el resultado y las computadoras actuan como sistemas expertos.\\
 
 Las computadoras son dispositivos simbolicos capaces de manipular cualquier tipo de simbolos siendo los numeros una clase importante, pero las computadoras son más generales que eso. Sabemos de la generalidad de la computación desde los tiempos de Alan Touring en los 1930's y se tienen intuiciones que Babbage tuvo también estudios que fueron afirmados por Ada Lovelace, en 1842 Ada Lovelace escribió sobre la ingenieria analitica de Babbage que buscaba unir el mundo mecanico con el mundo de las cosas abstractas, en la psicologia moderna es llamado The physical symbol system hypothesis y son las bases en que la Inteligencia Artificial funciona.\\
@@ -698,117 +707,61 @@ Para algun diagnostico médico ó segmentadores más fáciles, pero igual de com
 
 Programas que se puedan ejecutar en cualquier computadora o dispositivo que permita la ejecución de código multiplataforma como python ó C++, que tienen capacidades altas de manipulación simbolica, la toma de desiciones es primordial en una inteligencia basada en conocimiento y esa manipulación simbolica es necesaria.
 
+\newpage
 \section{Apendice}
 
-\subsection{Script de rasgos}
-
-La obtención de rasgos se realizó mediante un script que itera entre todas las carpetas de las imágenes, haciendo rotaciones y traslaciones aleatorias, buscando mantener la imagen, por lo que se le añade un efecto para que el fondo se replique
-
-
-\begin{lstlisting}[style=Matlab-editor, caption=Script de rasgos]
-%% Sample Matlab code
-!mv test.txt test2.txt
-A = [1, 2, 3;... foo
-     4, 5, 6];
-s = 'abcd';
-for k = 1:4
-  Disp(s(k)) % bar
-end
-%{
-create row vector x, then reverse it
-%}
-x = linspace(0,1,101);
-y = x(end:-1:1);
-\end{lstlisting}
-
+Todos los programas mencionados se encuentran dentro de la carpeta proyecto dentro del entregable.
 
 \subsection{Script de data aumentation}
 
+data\_aumentation.m\\
+
+El script busca aumentar el número de imágenes tomando en cuenta la conservación de la forma, esto se logró rotando la imagen cuidando enmascarar de unos a los elementos que puesen salir del área de la imagen.\\
+
+\subsection{Script de rasgos}
+
+script\_rasgos.m\\
+
+La obtención de rasgos se realizó mediante un script que itera entre todas las carpetas de las imágenes, es decir, cada carpeta representa una clase y dentro de la iteración se crea la matriz llamada clases.mat que guarda el nombre de la carpeta haciendo alucion al nombre de la clase.\\
+
+El proceso de extracción de rasgos se hace para cada imagen dentro de la carpeta que corresponde a su clase. El resultado se guarda en una matriz con el nombre del rasgo que el usuario haya seleccionado.
+
+\subsection{Script de segmentación}
+
+segmentar.m\\
+
+La segmentación se obtuvo a partir de una técnica hibrida en base a detectar los bordes con la técnica de Canny Edges. A continuación se mencionan los pasos que se siguieron.
+
+\begin{enumerate}
+\item Se cierra la imagen con un elemento estructurante de tipo square de 5 píxeles
+\item Se rellenan los huecos
+\item Se abre la imagen con uso de bwareaopen para quedarnos con elementos mayores a 2000 píxeles
+\item Se remueven elementos espurios a partir de una erosión con un elemento estructurante de disco de 4 píxeles
+\item Se abre la imagen con uso de bwareaopen para quedarnos con elementos mayores a 2000 píxeles
+\item Se dilata la imagen con un elemento estructurante de disco de 2 píxeles
+\item Se abre nuevamente la imagen con uso de bwareaopen para quedarnos con elementos mayores a 2000 píxeles
+\end{enumerate}
+
+de esta forma artesanal, garantizamos en tener cubierta la forma de nuestro objetos de interés y pudimos dar solución a los objetos cromados.
+
+\subsection{Rasgos momentos de HU}
+
+moments\_hu.m\\
+
+Calcula los siete momentos de Hu.
+
+\subsection{Rasgos esqueletización}
+
 We did some experiments \ldots
 
-\begin{lstlisting}[style=Matlab-editor, caption=Python example]
-%% Sample Matlab code
-!mv test.txt test2.txt
-A = [1, 2, 3;... foo
-     4, 5, 6];
-s = 'abcd';
-for k = 1:4
-  Disp(s(k)) % bar
-end
-%{
-create row vector x, then reverse it
-%}
-x = linspace(0,1,101);
-y = x(end:-1:1);
-\end{lstlisting}
+\subsection{Rasgos geométricos}
 
-\pagebreak
+We did some experiments \ldots
 
-\section{Experimentando en python}
+\subsection{Rasgos centro convexo}
 
-\begin{lstlisting}[language=Python, caption=experimentación python]
-import numpy as np
-    
-def incmatrix(genl1,genl2):
-    m = len(genl1)
-    n = len(genl2)
-    M = None #to become the incidence matrix
-    VT = np.zeros((n*m,1), int)  #dummy variable
-    
-    #compute the bitwise xor matrix
-    M1 = bitxormatrix(genl1)
-    M2 = np.triu(bitxormatrix(genl2),1) 
+We did some experiments \ldots
 
-    for i in range(m-1):
-        for j in range(i+1, m):
-            [r,c] = np.where(M2 == M1[i,j])
-            for k in range(len(r)):
-                VT[(i)*n + r[k]] = 1;
-                VT[(i)*n + c[k]] = 1;
-                VT[(j)*n + r[k]] = 1;
-                VT[(j)*n + c[k]] = 1;
-                
-                if M is None:
-                    M = np.copy(VT)
-                else:
-                    M = np.concatenate((M, VT), 1)
-                
-                VT = np.zeros((n*m,1), int)
-    
-    return M
-\end{lstlisting}
-
-\begin{lstlisting}[language=Python, caption=Python example]
-import numpy as np
-    
-def incmatrix(genl1,genl2):
-    m = len(genl1)
-    n = len(genl2)
-    M = None #to become the incidence matrix
-    VT = np.zeros((n*m,1), int)  #dummy variable
-    
-    #compute the bitwise xor matrix
-    M1 = bitxormatrix(genl1)
-    M2 = np.triu(bitxormatrix(genl2),1) 
-
-    for i in range(m-1):
-        for j in range(i+1, m):
-            [r,c] = np.where(M2 == M1[i,j])
-            for k in range(len(r)):
-                VT[(i)*n + r[k]] = 1;
-                VT[(i)*n + c[k]] = 1;
-                VT[(j)*n + r[k]] = 1;
-                VT[(j)*n + c[k]] = 1;
-                
-                if M is None:
-                    M = np.copy(VT)
-                else:
-                    M = np.concatenate((M, VT), 1)
-                
-                VT = np.zeros((n*m,1), int)
-    
-    return M
-\end{lstlisting}
 
 \pagebreak
 
