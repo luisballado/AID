@@ -15,7 +15,7 @@
 \contentsline {section}{\numberline {6}Clasificación}{12}{section.6}%
 \contentsline {section}{\numberline {7}Resultados}{13}{section.7}%
 \contentsline {section}{\numberline {8}Conclusiones}{14}{section.8}%
-\contentsline {section}{\numberline {9}Apendice}{15}{section.9}%
-\contentsline {subsection}{\numberline {9.1}Script de rasgos}{15}{subsection.9.1}%
-\contentsline {subsection}{\numberline {9.2}Script de data aumentation}{15}{subsection.9.2}%
-\contentsline {section}{\numberline {10}Experimentando en python}{17}{section.10}%
+\contentsline {section}{\numberline {9}Apendice}{16}{section.9}%
+\contentsline {subsection}{\numberline {9.1}Script de rasgos}{16}{subsection.9.1}%
+\contentsline {subsection}{\numberline {9.2}Script de data aumentation}{17}{subsection.9.2}%
+\contentsline {section}{\numberline {10}Experimentando en python}{18}{section.10}%

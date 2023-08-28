@@ -600,6 +600,62 @@ Dentro de las imágenes, la similitud de esqueletos entre la cinta, la llave per
 
 La mayoria de desarmadores no tiene ramas y tiene dos puntos finales, lo que lo confunde con una cinta al solo considerar las ramas y los puntos terminales se tiene una exactitud del 20\%, mientras al agregar el num de pixeles crece al 78\%, agregando más información como el área y perimetro la probabilidad de acierto crece aún más, presentandose valores arriba del 90\%.
 
+\begin{figure}[h]
+  \centering
+  \begin{subfigure}{0.5\linewidth}
+    \includegraphics[width=\linewidth]{resultados_colores/todo_negro}
+    \caption{Imagen objetos fondo negro}
+    \label{fig:1a}
+  \end{subfigure}\hfill
+  \begin{subfigure}{0.5\linewidth}
+    \includegraphics[width=\linewidth]{resultados_colores/resultado_negro_hue_1}
+    \caption{Resultado fondo negro, hue 100\%}
+    \label{fig:1a}
+  \end{subfigure}
+  
+  \begin{subfigure}{0.5\linewidth}
+    \includegraphics[width=\linewidth]{resultados_colores/todo_rojo}
+    \caption{Imagen objetos con fondo rojo}
+    \label{fig:1a}
+  \end{subfigure}\hfill
+  \begin{subfigure}{0.5\linewidth}
+    \includegraphics[width=\linewidth]{resultados_colores/resultado_rojo_cconvexo_0_89}
+    \caption{Resultado fondo rojo, cerco convexo 89\%}
+    \label{fig:1a}
+  \end{subfigure}
+  \caption{Imágenes diferentes fondos.}
+  \label{fig:1}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \begin{subfigure}{0.5\linewidth}
+    \includegraphics[width=\linewidth]{resultados_colores/todo_azul}
+    \caption{Imagen objetos fondo azul}
+    \label{fig:1a}
+  \end{subfigure}\hfill
+  \begin{subfigure}{0.5\linewidth}
+    \includegraphics[width=\linewidth]{resultados_colores/resultado_azul_geom_0_97}
+    \caption{Resultado fondo azul, rasgos geometricos 97\%}
+    \label{fig:1a}
+  \end{subfigure}
+  
+  \begin{subfigure}{0.5\linewidth}
+    \includegraphics[width=\linewidth]{resultados_colores/todo_claro}
+    \caption{Imagen objetos fondo claro}
+    \label{fig:1a}
+  \end{subfigure}\hfill
+  \begin{subfigure}{0.5\linewidth}
+    \includegraphics[width=\linewidth]{resultados_colores/resultado_claro_cconvexo_0_89}
+    \caption{Resultado fondo claro, cerco convexo 89\%}
+    \label{fig:1a}
+  \end{subfigure}
+  \caption{Proceso de segmentado última parte.}
+  \label{fig:1}
+\end{figure}
+
+
+
 \newpage
 \section{Conclusiones}
 
