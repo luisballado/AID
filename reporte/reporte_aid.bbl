@@ -14,6 +14,12 @@ CDW.
   2023.
 \newblock [Online; accessed 27-Agust-2023].
 
+\bibitem{youtube}
+T.~C. Chronicles.
+\newblock {Artificial Inteligence}.
+\newblock \url{https://www.youtube.com/watch?v=_S3m0V_ZF_Q}, 1984.
+\newblock [Online; accessed 27-Agust-2023].
+
 \bibitem{10059977}
 M.~N.~R. Devi, A.~Kumar, G.~Swetha, U.~S. Chavan, and V.~M. Davasam.
 \newblock Cancer detection using image processing and machine learning.
@@ -32,5 +38,13 @@ MatLab.
 N.~Smolyanskiy, A.~Kamenev, J.~Smith, and S.~Birchfield.
 \newblock Toward low-flying autonomous mav trail navigation using deep neural
   networks for environmental awareness, 2017.
+
+\bibitem{github}
+Tejas1415.
+\newblock {Hu Invariant Moments in MATLAB}.
+\newblock
+  \url{https://raw.githubusercontent.com/Tejas1415/Hu-s-Invariant-Moments-in-MATLAB/master/hu_moments.m},
+  2023.
+\newblock [Online; accessed 29-Julio-2023].
 
 \end{thebibliography}

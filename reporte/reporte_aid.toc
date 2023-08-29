@@ -7,10 +7,10 @@
 \contentsline {subsection}{\numberline {4.1}Operaciones morfológicas}{9}{subsection.4.1}%
 \contentsline {subsection}{\numberline {4.2}Erosión y dilatación}{10}{subsection.4.2}%
 \contentsline {section}{\numberline {5}Extracción de características}{10}{section.5}%
-\contentsline {subsubsection}{\numberline {5.0.1}Geométricas básicas}{12}{subsubsection.5.0.1}%
+\contentsline {subsubsection}{\numberline {5.0.1}Geométricas básicas}{11}{subsubsection.5.0.1}%
 \contentsline {subsubsection}{\numberline {5.0.2}Rasgos basados en esqueleto}{12}{subsubsection.5.0.2}%
-\contentsline {subsubsection}{\numberline {5.0.3}Momentos invariantes Hue}{13}{subsubsection.5.0.3}%
-\contentsline {subsubsection}{\numberline {5.0.4}Cerco convexo}{13}{subsubsection.5.0.4}%
-\contentsline {section}{\numberline {6}Clasificación}{14}{section.6}%
-\contentsline {section}{\numberline {7}Resultados}{15}{section.7}%
-\contentsline {section}{\numberline {8}Conclusiones}{16}{section.8}%
+\contentsline {subsubsection}{\numberline {5.0.3}Momentos invariantes Hue}{12}{subsubsection.5.0.3}%
+\contentsline {subsubsection}{\numberline {5.0.4}Cerco convexo}{12}{subsubsection.5.0.4}%
+\contentsline {section}{\numberline {6}Clasificación}{13}{section.6}%
+\contentsline {section}{\numberline {7}Resultados}{14}{section.7}%
+\contentsline {section}{\numberline {8}Conclusiones}{15}{section.8}%
