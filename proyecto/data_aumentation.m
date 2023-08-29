@@ -58,7 +58,7 @@ for k = 1 : length(theFiles)
     if contains('aumentar', Opcion)
         angle = 0 + (135-0)*rand();
         T = @(original) imrotate(original,angle,'bilinear','crop');
-        %// Apply transformation
+        %// Aplicar transformacion
         TA = T(original);
         mask = T(ones(size(original)))==1;
         original(mask) = TA(mask);

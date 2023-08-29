@@ -1,4 +1,3 @@
-
 % LaTeX Template for short student reports.
 % Citations should be in bibtex format and go in references.bib
 \documentclass[a4paper, 11pt]{article}
@@ -239,11 +238,7 @@ La toma de fotografías se realiza en un ambiente controlado como se muestra en 
 \label{cubo}
 \end{figure}
 
-Se usaron transformaciones geométricas para modificar la relación espacial entre píxeles en una imagen, usando propiedades que no deformen al objeto de interés como:
-
-\begin{itemize}
-\item Rotaciones
-\end{itemize}
+Se usaron transformaciones geométricas para modificar la relación espacial entre píxeles en una imagen, usando propiedades que no deformen al objeto de interés como la rotación. Se cuido en rellenar los valores del fondo con unos (1), para evitar los valores obscuros por los ceros que se puedan presentar por la rotación.\\
 
 Logrando crear imágenes artificiales, de manera que sirvan para el aumento del conjunto de imágenes.\\
 
@@ -254,13 +249,14 @@ Al contar con imágenes de buena calidad, solo se mejoró el contraste para redu
 
 El mejoramiento es la manipulación de una imagen, de tal forma que el resultado sea más útil que la imagen original para una aplicación en particular.\\
 
-Una transformación de intensidad nos ayuda a modificar el constraste. Dentro del proyecto se aplicó una transformación de intensidad con un escalar de 1.5, para algunas imágenes más obscuras el valor de 2 resulta mejor para la detección de bordes más cercanos al objeto.\\
+Una transformación de intensidad nos ayuda a modificar el constraste. Dentro del proyecto se aplicó una transformación de intensidad con un escalar de 1.5.\\
+Para algunas imágenes más obscuras el valor de 2 resulta mejor para la detección de bordes más cercanos al objeto. El problema de obtener la mejor intensidad de brillo se puede optimizar en base a los desempeños obtenidos mediante alguna estrategia de optimización.\\
 
 \begin{figure}[ht]%
     \centering
     \subfloat[\centering Imagen original]{{\includegraphics[width=7cm]{paso1} }}%
     \qquad
-    \subfloat[\centering Imagen modificada del brillo]{{\includegraphics[width=7cm]{brillo} }}%
+    \subfloat[\centering Imagen modificada]{{\includegraphics[width=7cm]{brillo} }}%
     \caption{Mejoramiento de contraste.}%
     \label{fig:grayImage}%
 \end{figure}
@@ -276,22 +272,14 @@ A partir de la imagen original pasada a double\footnote{se hace un cambio de est
   img_ajustada = original_gris * factor_brillo;
 \end{lstlisting}
 
-A pesar de que los objetos en su mayoría poseen partes cromadas, se logran contrastar con el fondo original blanco. Logrando apreciar mejor los objetos, este paso es de gran ayuda. Siendo el factor de brillo un atributo dentro de la función de segmentación.
-%Ecualización del histograma.\\
-
-%No se tuvo que ecualizar ni mejorar por CLAHE, pero es bueno saber la existencia de estas técnicas para crear sistemas y filtros sofisticados.\\
-
-%Modo de degradación de una imagen.\\
-
-%No se hizo uso de ningun filtro, buscando evitar el efecto de deslavado y poder detectar los bordes lo más puros posibles.\\
-
-%Pero el filtro de difusión anisotrópico puede considerarse en la implementación.\\
+A pesar de que los objetos en su mayoría poseen partes cromadas, se logran contrastar con el fondo original blanco. Logrando apreciar mejor los objetos. Éste paso es de gran ayuda, siendo el factor de brillo un atributo dentro de la función de segmentación.
 \pagebreak
+
 \section{Segmentación}
 
 Se hacen pruebas con diversas técnicas de segmentación, optando por un resultado sencillo con uso de operaciones morfológicas en base a una imagen de detección de bordes con Canny Edges.\\
 
-De igual forma se exploraron otras técnicas que se listan a continuación.\\
+Previo a la estrategia de segmentación propuesta, se exploraron otras técnicas que se listan a continuación.\\
 
 \begin{itemize}
 \item Método de umbralado global \textbf{Método de Otsu}
@@ -324,10 +312,8 @@ De igual forma se exploraron otras técnicas que se listan a continuación.\\
   
 \item Visualización de la \textbf{Entropía}
 
-  Con una segmentación mediante el método de entropía se puede obtener la información de la presencia de los objetos, lamentablemente al estar con mucha información no fué utilizada en el proyecto. Pero replanteandolo nuevamenta, se puede hacer algun filtro para quedarse solo con los píxeles blancos con algun método como lógica difusa. La figura \ref{entropia} ilustra el resultado después de aplicar éste método (Entropía).
+  Con una segmentación mediante el método de entropía, se puede obtener la información de la presencia de los objetos. Lamentablemente al estar con mucha información no fué utilizada en el proyecto. Pero replanteandolo nuevamenta, se puede hacer algún filtro para quedarse solo con los píxeles blancos con alguna técnica como lógica difusa. La figura \ref{entropia} ilustra el resultado después de aplicar éste método (Entropía).
 
-  \vspace{1cm}
-  
   \begin{figure}[ht]%
     \centering
     \subfloat[\centering Imagen original escala de grises]{{\includegraphics[width=7cm]{gris_entropia} }}%
@@ -364,15 +350,29 @@ De igual forma se exploraron otras técnicas que se listan a continuación.\\
   
 \end{itemize}
 
-En matlab, el filtro de \textbf{Canny Edges} detecta bordes buscando los máximos locales del gradiente de la imagen. Las funciones de borde utilizan la derivada de un filtro gaussiano para calcular el gradiente. Este método utiliza dos umbrales para detectar bordes fuertes y débiles e incluye bordes débiles en la salida si están asociados con bordes fuertes. Debido a que el método de Canny utiliza dos umbrales diferentes, es menos propenso a errores debido al ruido que otros métodos y es más probable que detecte bordes realmente débiles \cite{canny}.
+%En matlab, el filtro de \textbf{Canny Edges} detecta bordes buscando los máximos locales del gradiente de la imagen. Las funciones de borde utilizan la derivada de un filtro gaussiano para calcular el gradiente.
+Éste método utiliza dos umbrales para detectar bordes fuertes y débiles e incluye bordes débiles en la salida si están asociados con bordes fuertes. Debido a que el método de Canny utiliza dos umbrales diferentes, es menos propenso a errores debido al ruido que otros métodos y es más probable que detecte bordes realmente débiles \cite{canny}.
 
 \begin{itemize}
 \item Sigma valor escalar que especifica la desviación estándar del filtro gaussiano. El valor predeterminado es sqrt(2).  automáticamente en función de sigma \cite{canny}.
-
 \item Umbral de sensibilidad es especificado como escalar numérico, la función en matlab ignora todos los bordes cuya intensidad no es mayor que threshold indicado, al no indicar un valor la función escoge los valores automáticamente \cite{canny}.
 \end{itemize}
 
-Al considerar la última técnica con la obtención de los bordes, debemos cerrar la imagen con elementos estructurantes, donde podemos encontrar la línea, ésta puede tomar valores de inclinacion a ciertos grados y ser de 4 ó 8 vecindad.\\
+Al considerar la última técnica con la obtención de los bordes, debemos cerrar la imagen con elementos estructurantes, donde podemos encontrar la línea, disco, diamante, cuadrado, rectángulo.\\
+
+La segmentación se obtuvo a partir de una técnica hibrida en base a detectar los bordes con la técnica de Canny Edges. A continuación se mencionan los pasos que se siguieron.
+
+  \begin{enumerate}
+  \item Se cierra la imagen con un elemento estructurante de tipo square de 5 píxeles
+  \item Se rellenan los huecos
+  \item Se abre la imagen con uso de bwareaopen para quedarnos con elementos mayores a 2000 píxeles
+  \item Se remueven elementos espurios a partir de una erosión con un elemento estructurante de disco de 4 píxeles
+  \item Se abre la imagen con uso de bwareaopen para quedarnos con elementos mayores a 2000 píxeles
+  \item Se dilata la imagen con un elemento estructurante de disco de 2 píxeles
+  \item Se abre nuevamente la imagen con uso de bwareaopen para quedarnos con elementos mayores a 2000 píxeles
+  \end{enumerate}
+  
+  de esta forma artesanal, garantizamos en tener cubierta la forma de nuestro objetos de interés y pudimos dar solución a los objetos cromados.
 
 \subsection{Operaciones morfológicas}
 
@@ -387,38 +387,89 @@ El borde de un conjunto A que contiene los píxeles del primer plano se obtiene 
 
 \[B(A) = A - (A \fminus b)\]
 
-donde A es la figura binaria y b el elemento estructurante.
+donde A es la figura binaria y b el elemento estructurante.\\
+
+Un orificio es una región del fondo rodeado por un borde conexo de píxeles del primer plano. Una cerradura morfológica en la imagen binaria utilizando un elemento estructurante de tipo cuadrado de 5 píxeles.\\
+
+Rellenar huecos de la imagen binaria. Un hueco es un conjunto de píxeles de fondo que no se puede alcanzar rellenando el fondo desde el borde de la imagen.
+
+\begin{lstlisting}[style=Matlab-editor, caption=Cerradura seguido de llenado de huecos.]
+  %CERRAR CON ELEMENTO ESTRUCTURANTE SQUARE 5
+  cerrar_imagen = imclose(imgBordes,strel('square',5));
+  %LLENAR HUECOS
+  rellenar_imagen = imfill(cerrar_imagen,'holes');
+\end{lstlisting}
+
+\begin{figure}[ht]%
+    \centering
+    \subfloat[\centering Imagen después de Canny Edge y de efectuar una cerradura]{{\includegraphics[width=7cm]{paso3} }}%
+    \qquad
+    \subfloat[\centering Imagen después de llenar huecos]{{\includegraphics[width=7cm]{paso4} }}%
+    \caption{Antes y después de la cerradura y llenado de huecos.}%
+    \label{paso1}%
+\end{figure}
+
+Dentro del proyecto, una de las operaciones más recurridas es la apertura del área para eliminar los elementos menores a 2,000 píxeles de la imagen binaria.
+
+\begin{lstlisting}[style=Matlab-editor, caption=Apertura de 2000px]
+  %QUITAR ELEMENTOS MENORES A 2000px
+  imagen_segmentada = bwareaopen(rellenar_imagen,2000);
+\end{lstlisting}
+
+%Contorno de una región\\
+
+%El contorno de una región conexa es el conjunto de pixeles que tienen al menos en pixel vecino que corresponde al fondo en 4 ó 8 adyacencia.\\
+
+
+%Buscar que tipo de etiquetado usa BWLABEL .- QUE ALGORITMO?\\
+
+%Etiquetado de regiones conexas\\
 
 \subsection{Erosión y dilatación}
 
-Explicar las partes de erosion y dilatacion
+En unas versiones tempranas de la estrategia seguida, se contaban con uniones de los objetos de interés. Esto se pudo resolver erosionando la imagen binaria para después eliminar algunos objetos espurios dentro de la imagen.
 
-\subsection{Rellenado de orificios}
+\begin{lstlisting}[style=Matlab-editor, caption=Erosión con elemento estructurante disco 4px]
+  %EROSIONAR PARA LIMPIAR MAS LA IMAGEN
+  erode_image = imerode(imagen_segmentada,strel('disk',4));
+\end{lstlisting}
 
-Un orificio es una región del fondo rodeado por un borde conexo de pixeles del primer plano.\\
+Se vuelve a efectuar una apertura del área, buscando eliminar elementos menores a 2,000 píxeles.
 
-Se efectua una reconstrucción por dilatación.\\
+\begin{lstlisting}[style=Matlab-editor, caption=Apertura de 2000px]
+  %QUITAR ELEMENTOS MENORES A 2000px
+  mascara = bwareaopen(erode_image,2000);
+\end{lstlisting}
 
-Contorno de una región\\
+Se hace uso de una dilatación para dar forma al objeto de interés que deseamos reconocer.
 
-El contorno de una región conexa es el conjunto de pixeles que tienen al menos en pixel vecino que corresponde al fondo en 4 ó 8 adyacencia.\\
+\begin{lstlisting}[style=Matlab-editor, caption=Dilatación con elemento estructurante disco 2px]
+  %DILATAR PARA PRESERVAR LA FORMA DEL OBJETO
+  PP = imdilate(mascara,strel('disk',2));
+  P = bwareaopen(PP,2000);
+\end{lstlisting}
 
+\begin{figure}[ht]%
+    \centering
+    \subfloat[\centering Imagen antes de la erosión con elementos espurios]{{\includegraphics[width=7cm]{paso5} }}%
+    \qquad
+    \subfloat[\centering Imagen después de la apertura de 2,000px]{{\includegraphics[width=7cm]{paso9} }}%
+    \caption{Antes y después del último paso en la segmentación.}%
+    \label{paso2}%
+\end{figure}
 
-Buscar que tipo de etiquetado usa BWLABEL .- QUE ALGORITMO?\\
-
-Etiquetado de regiones conexas\\
 
 \section{Extracción de características}
 
 El reconocimiento automático de objetos requiere calcular rasgos que describan propiedades fisicas de los objetos.\\
 
-Un rasgo (atributo o característica), es un valor numérico que cuantifica alguna propiedad de forma, textura, color, geometria, etc.
+Un rasgo (atributo o característica), es un valor numérico que cuantifica alguna propiedad de forma, textura, color, geometría, etc.
 
 \begin{itemize}
-\item Un rasgo debe ser discriminante, invariante, incorrelado y rápido de computar.
+\item Un rasgo debe ser discriminante, invariante, incorrelado y rápido de calcular.
 \item Los rasgos de forma generalmente se calculan a partir de la segmentación del objeto y se divide entre todos los pixeles de las regiones de interés.
-\item Basados en región distribución de todos los pixeles.
-\item Basados en contorno, variaciones a lo largo del contorno.
+%\item Basados en región distribución de todos los pixeles.
+%\item Basados en contorno, variaciones a lo largo del contorno.
 \end{itemize}
 
 La extracción de características que se utilizaron en el proyecto son las siguientes:
@@ -430,14 +481,12 @@ La extracción de características que se utilizaron en el proyecto son las sigu
 \item Esqueletización
 \end{enumerate}
 
-Se creó un script llamado \textbf{script\_rasgos.m} el cual itera dentro de la carpeta llamada data\_aumentation, la cual consiste en las imágenes del dataset. Al considerarse el número de las carpetas y si se desea crear una nueva clase, solo bastara con crear una nueva carpeta con el nombre de la nueva clase y poner las imágenes a extraer rasgos dentro de ella. Al final el escript cálcula los rasgos a partir de la opción que haya elegido el usuario y guardandola en una extensión .mat.
+Se creó un script llamado \textbf{script\_rasgos.m} el cual itera dentro de la carpeta llamada data\_aumentation, la cual consiste en las imágenes del dataset. Al considerarse el número de las carpetas y si se desea crear una nueva clase, solo bastara con crear una nueva carpeta con el nombre de la nueva clase y poner las imágenes a extraer rasgos dentro de ella. Al final el script cálcula los rasgos a partir de la opción que haya elegido el usuario y guardándola en una extensión .mat.
 
-
+\newpage
 \subsubsection{Geométricas básicas}
 
-El área es el número total de pixeles que cubre la región del objeto.\\
-
-El perimetro es la longitud del contorno del objeto. El resultado depende del tipo de conectividad que pueda tener. (4 ó 8 vecindad).
+El área es el número total de pixeles que cubre la región del objeto. El perimetro es la longitud del contorno del objeto. El resultado depende del tipo de conectividad que pueda tener. (4 ó 8 vecindad).
 
 Para el cálculo de rasgos geométricos básicos, se hace uso del área y perimetro de la figura, el cual se obtiene mediante la imagen segmentada iterando entre todas las etiquetas.
 
@@ -459,16 +508,18 @@ Para el cálculo de rasgos geométricos básicos, se hace uso del área y perime
 
 \subsubsection{Rasgos basados en esqueleto}
 
-Otra generación de rasgos usada en el proyecto, son los rasgos por esqueletizar la imagen.
+Otra generación de rasgos usada en el proyecto, son los rasgos a partir de esqueletizar la imagen binaria.
 
 \begin{figure}[ht]%
     \centering
     \subfloat[\centering Imagen umbralada]{{\includegraphics[width=7cm]{paso9} }}%
     \qquad
-    \subfloat[\centering Imagen esqueletizada]{{\includegraphics[width=7cm]{resultado_esqueleto} }}%
+    \subfloat[\centering Imagen esqueletizada]{{\includegraphics[width=8cm]{resultado_esqueleto} }}%
     \caption{Rasgos basados en esqueleto.}%
     \label{entropia}%
 \end{figure}
+
+Se calculan los siguientes rasgos en base a la imagen esqueletizada.
 
 \begin{itemize}
 \item Puntos finales
@@ -480,20 +531,20 @@ Otra generación de rasgos usada en el proyecto, son los rasgos por esqueletizar
 
 \subsubsection{Momentos invariantes Hue}
 
-Los momentos son proyecciones de una función sobre una base polinomial usados para medir la distribución de masa de un cuerpo.
+Un momento es la proyección de una función sobre una base polinómica utilizada para medir la distribución de masa de un objeto.
 
 \subsubsection{Cerco convexo}
 
-Los momentos son proyecciones de una función sobre una base polinomial usados para medir la distribución de masa de un cuerpo.
+Las características basadas en bordes convexos comparan un objeto con sus bordes convexos para identificar regiones cóncavas o sobrantes. Cuanto más irregular es la forma del objeto, más espacio queda. Los rasgos que se obtienen son la solidez y la convexidad. 
 
-\begin{figure}[ht]%
-    \centering
-    \subfloat[\centering Imagen segmentada martillo]{{\includegraphics[width=4cm]{martillo} }}%
-    \qquad
-    \subfloat[\centering Cerco convexo martillo]{{\includegraphics[width=4cm]{cerco_convexo_martillo} }}%
-    \caption{Ejemplo martillo cerco convexo.}%
-    \label{entropia}%
-\end{figure}
+%\begin{figure}[ht]%
+%    \centering
+%    \subfloat[\centering Imagen segmentada martillo]{{\includegraphics[width=4cm]{martillo} }}%
+%    \qquad
+%    \subfloat[\centering Cerco convexo martillo]{{\includegraphics[width=4cm]{cerco_convexo_martillo} }}%
+%    \caption{Ejemplo martillo cerco convexo.}%
+%    \label{entropia}%
+%\end{figure}
 
 \begin{figure}[ht]%
     \centering
@@ -504,11 +555,6 @@ Los momentos son proyecciones de una función sobre una base polinomial usados p
     \label{entropia}%
 \end{figure}
 
-
-\begin{AutoMultiColItemize}
-\item Solidez
-\item Convexidad
-\end{AutoMultiColItemize}
 
 \pagebreak
 \section{Clasificación}
@@ -619,7 +665,6 @@ El algoritmo KNN realiza los siguientes pasos:
   \label{fig:1}
 \end{figure}
 
-
 Dentro de las imágenes, la similitud de esqueletos entre la cinta, la llave perica, tijera, pinzas de punta y electrica que tienen formas similares.
 
 La mayoria de desarmadores no tiene ramas y tiene dos puntos finales, lo que lo confunde con una cinta al solo considerar las ramas y los puntos terminales se tiene una exactitud del 20\%, mientras al agregar el num de pixeles crece al 78\%, agregando más información como el área y perimetro la probabilidad de acierto crece aún más, presentandose valores arriba del 90\%.
@@ -679,7 +724,6 @@ La mayoria de desarmadores no tiene ramas y tiene dos puntos finales, lo que lo 
 \end{figure}
 
 
-
 \newpage
 \section{Conclusiones}
 
@@ -703,64 +747,51 @@ Al poner conocimiento en programas computacionales que para los humanos nos es f
 Por otra parte, los sistemas expertos basados en conocimientos son aplicables en cualquier  área en que sea especializado el conocimiento y sea rutinario la toma de desiciones, estrategias para resolver problemas, diagnosticos, .. etc.\\
 Siendo de gran ayuda en un gran rango de aplicaciones, el \textbf{conocimiento medico}, en clasificación de un experto, puede estar reflejado con el funcionamiento de una red neuronal.\\
 
-Para algun diagnostico médico ó segmentadores más fáciles, pero igual de complicados como la segmentación en imágenes para la creación de sistemas autonomos.\\
+Para algún diagnostico médico ó segmentadores más fáciles, pero igual de complicados como la segmentación en imágenes para la creación de sistemas autonomos.\\
 
 Programas que se puedan ejecutar en cualquier computadora o dispositivo que permita la ejecución de código multiplataforma como python ó C++, que tienen capacidades altas de manipulación simbolica, la toma de desiciones es primordial en una inteligencia basada en conocimiento y esa manipulación simbolica es necesaria.
 
-\newpage
-\section{Apendice}
+%\newpage
+%\section{Apendice}
 
-Todos los programas mencionados se encuentran dentro de la carpeta proyecto dentro del entregable.
+%Todos los programas mencionados se encuentran dentro de la carpeta proyecto dentro del entregable.
 
-\subsection{Script de data aumentation}
+%\subsection{Script de data aumentation}
 
-data\_aumentation.m\\
+%data\_aumentation.m\\
 
-El script busca aumentar el número de imágenes tomando en cuenta la conservación de la forma, esto se logró rotando la imagen cuidando enmascarar de unos a los elementos que puesen salir del área de la imagen.\\
+%El script busca aumentar el número de imágenes tomando en cuenta la conservación de la forma, esto se logró rotando la imagen cuidando enmascarar de unos a los elementos que puesen salir del área de la imagen.\\
 
-\subsection{Script de rasgos}
+%\subsection{Script de rasgos}
 
-script\_rasgos.m\\
+%script\_rasgos.m\\
 
-La obtención de rasgos se realizó mediante un script que itera entre todas las carpetas de las imágenes, es decir, cada carpeta representa una clase y dentro de la iteración se crea la matriz llamada clases.mat que guarda el nombre de la carpeta haciendo alucion al nombre de la clase.\\
+%La obtención de rasgos se realizó mediante un script que itera entre todas las carpetas de las imágenes, es decir, cada carpeta representa una clase y dentro de la iteración se crea la matriz llamada clases.mat que guarda el nombre de la carpeta haciendo alucion al nombre de la clase.\\
 
-El proceso de extracción de rasgos se hace para cada imagen dentro de la carpeta que corresponde a su clase. El resultado se guarda en una matriz con el nombre del rasgo que el usuario haya seleccionado.
+%El proceso de extracción de rasgos se hace para cada imagen dentro de la carpeta que corresponde a su clase. El resultado se guarda en una matriz con el nombre del rasgo que el usuario haya seleccionado.
 
-\subsection{Script de segmentación}
+%\subsection{Script de segmentación}
 
-segmentar.m\\
+%segmentar.m\\
 
-La segmentación se obtuvo a partir de una técnica hibrida en base a detectar los bordes con la técnica de Canny Edges. A continuación se mencionan los pasos que se siguieron.
 
-\begin{enumerate}
-\item Se cierra la imagen con un elemento estructurante de tipo square de 5 píxeles
-\item Se rellenan los huecos
-\item Se abre la imagen con uso de bwareaopen para quedarnos con elementos mayores a 2000 píxeles
-\item Se remueven elementos espurios a partir de una erosión con un elemento estructurante de disco de 4 píxeles
-\item Se abre la imagen con uso de bwareaopen para quedarnos con elementos mayores a 2000 píxeles
-\item Se dilata la imagen con un elemento estructurante de disco de 2 píxeles
-\item Se abre nuevamente la imagen con uso de bwareaopen para quedarnos con elementos mayores a 2000 píxeles
-\end{enumerate}
+%\subsection{Rasgos momentos de HU}
 
-de esta forma artesanal, garantizamos en tener cubierta la forma de nuestro objetos de interés y pudimos dar solución a los objetos cromados.
+%moments\_hu.m\\
 
-\subsection{Rasgos momentos de HU}
+%Calcula los siete momentos de Hu.
 
-moments\_hu.m\\
+%\subsection{Rasgos esqueletización}
 
-Calcula los siete momentos de Hu.
+%We did some experiments \ldots
 
-\subsection{Rasgos esqueletización}
+%\subsection{Rasgos geométricos}
 
-We did some experiments \ldots
+%We did some experiments \ldots
 
-\subsection{Rasgos geométricos}
+%\subsection{Rasgos centro convexo}
 
-We did some experiments \ldots
-
-\subsection{Rasgos centro convexo}
-
-We did some experiments \ldots
+%We did some experiments \ldots
 
 
 \pagebreak
