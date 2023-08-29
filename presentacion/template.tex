@@ -18,9 +18,9 @@
 %	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
 %----------------------------------------------------------------------------------------
 \documentclass[
-	12pt, % Set the default font size, options include: 8pt, 9pt, 10pt, 11pt, 12pt, 14pt, 17pt, 20pt
+  24pt, % Set the default font size, options include: 8pt, 9pt, 10pt, 11pt, 12pt, 14pt, 17pt, 20pt
 	%t, % Uncomment to vertically align all slide content to the top of the slide, rather than the default centered
-	aspectratio=169, % Uncomment to set the aspect ratio to a 16:9 ratio which matches the aspect ratio of 1080p and 4K screens and projectors
+	%aspectratio=169, % Uncomment to set the aspect ratio to a 16:9 ratio which matches the aspect ratio of 1080p and 4K screens and projectors
 ]{beamer}
 
 \graphicspath{{Images/}{./}} % Specifies where to look for included images (trailing slash required)
@@ -280,283 +280,173 @@
 %----------------------------------------------------------------------------------------
 
 \section{Conjunto de imagenes}
-\begin{frame}{Resumen}%{Problemática}
-  \bigskip % Vertical whitespace
+
+\begin{frame}{Conjunto de imágenes}
   \centering
-  \includegraphics[width=0.45\textwidth,height=0.35\textheight]{cinves}$^\dag$
-  \hfil
-  \includegraphics[width=0.45\textwidth,height=0.35\textheight]{cinves}$^\dag$
-  \vspace{2pt}
-  \includegraphics[width=0.45\textwidth,height=0.35\textheight]{cinves}$^\dag$ 
-  \hfil
-  \includegraphics[width=0.45\textwidth,height=0.35\textheight]{cinves}$^\dag$\\
-  \rule{0in}{1.2em}$^\dag$ \small Drone Inspections Based on Best Use Cases \\
-  \tiny \url{https://enterprise-insights.dji.com/blog/complete-guide-to-drone-inspections}
+  \includegraphics[width=0.45\textwidth,height=0.35\textheight]{todas_blanco}
+  \includegraphics[width=0.45\textwidth,height=0.35\textheight]{todo_azul}
+  \includegraphics[width=0.45\textwidth,height=0.35\textheight]{todo_negro}
+  \includegraphics[width=0.45\textwidth,height=0.35\textheight]{todo_rojo}
 \end{frame}
 
-\begin{frame}{GIFs in Beamer}
+\begin{frame}{Data Aumentation}
 \centering
-\animategraphics[loop,width=4cm]{10}{data_aumentation-}{11}{32}
+\animategraphics[loop,width=9cm]{10}{data_aumentation-}{11}{32}
 \end{frame}
 
 \section{Segmentación}
-\begin{frame}{Descripción del proyecto}
-  \begin{minipage}{0.47\textwidth}
-    \begin{itemize}
-    \item<1-> Coordinación eficiente para la exploración multi-VANT 
-    \item<2-> Optimizar la cobertura en entornos complejos
-    \item<3-> Toma de decisiones colaborativa y asignación de tareas
-    \item<4-> Evasión y coordinación de obstáculos en tiempo real
-    \item<5-> Fusion de información (sensores y navegación)
-    \end{itemize}
-  \end{minipage}
-  \begin{minipage}{0.5\textwidth}
-    \only<1>{\includegraphics[width=\textwidth]{cinves}$^\dag$\\
-      \rule{0in}{1.2em}$^\dag$\scriptsize Hardware in the loop framework proposal for a semi-autonomous car architecture in a closed route environment \cite{CurielRamirez2019}
-    }
-    \only<2>{\includegraphics[width=\textwidth]{cinves}$^\dag$\\
-      \rule{0in}{1.2em}$^\dag$\scriptsize Hardware in the loop framework proposal for a semi-autonomous car architecture in a closed route environment \cite{CurielRamirez2019}
-    }
-    \only<3>{\includegraphics[width=\textwidth]{cinves}$^\dag$\\
-      \rule{0in}{1.2em}$^\dag$\scriptsize Hardware in the loop framework proposal for a semi-autonomous car architecture in a closed route environment \cite{CurielRamirez2019}
-    }
-    \only<4>{\includegraphics[width=\textwidth]{cinves}$^\dag$\\
-      \rule{0in}{1.2em}$^\dag$\scriptsize Hardware in the loop framework proposal for a semi-autonomous car architecture in a closed route environment \cite{CurielRamirez2019}
-    }
-    \only<5>{\includegraphics[width=\textwidth]{cinves}$^\dag$\\
-      \rule{0in}{1.2em}$^\dag$\scriptsize Hardware in the loop framework proposal for a semi-autonomous car architecture in a closed route environment \cite{CurielRamirez2019}
-    }
-  \end{minipage}
+
+\begin{frame}{Segmentación}
+
+  Retos personales para la segmentación
+  \bigskip % Vertical whitespace
+  \begin{itemize}
+  \item<1-> No le afecte el color de fondo
+    \bigskip % Vertical whitespace
+  \item<2-> Poder reconocer imágenes parecidas en fondos lisos de internet
+  \end{itemize}
+  
 \end{frame}
 
-\section{Abstracción de caracteristicas}
-\begin{frame}{Arquitectura híbrida}
-  \begin{figure}
-    \centering
-    \includegraphics[scale=0.30]{cinves}$^\dag$\\
-    \rule{0in}{1.2em}$^\dag$\scriptsize Hardware in the loop framework proposal for a semi-autonomous car architecture in a closed route environment \cite{CurielRamirez2019}\\
-  \end{figure}
+\begin{frame}{Pruebas}
+
+  \begin{figure}[h]
+  \centering
+  \begin{subfigure}{0.4\linewidth}
+    \includegraphics[width=\linewidth]{otsu} 
+    \caption{Método de Otsu}
+  \end{subfigure}
+  \begin{subfigure}{0.4\linewidth}
+    \includegraphics[width=\linewidth]{kmeans2}
+    \caption{Método K-Means, k=2}
+  \end{subfigure}
+  \begin{subfigure}{0.4\linewidth}
+    \includegraphics[width=\linewidth]{kmeans3}
+    \caption{Método K-Means, k=3}
+  \end{subfigure}
+  \begin{subfigure}{0.4\linewidth}
+    \includegraphics[width=\linewidth]{entropia}
+    \caption{Método con entropía}
+  \end{subfigure}
+  \label{fig:1}
+\end{figure}
 \end{frame}
 
-\begin{frame}{Multi-robots}
+\begin{frame}{Canny Edges}
   \begin{columns}
     \column{0.5\textwidth}
-    Beneficios coordinación multi-VANT
+    Pasos:
     \begin{itemize}
-    \item Eficiencia y cobertura
-    \item Redundancia y tolerancia a fallos
-    \item Adaptabilidad a entornos dinámicos
-    \item Distribución de carga de trabajo
-    \item Esfuerzo colaborativo
+    \item Suaviza la imagen con un filtro Gausiano
+    \item Calcula el gradiente de la imagen (sobel 3x3)
+    \item A partir de la dirección (x,y), se calcula la magnitud
+    \item Se obtiene la orientación para cada píxel
     \end{itemize}
     \column{0.5\textwidth}
-    \includegraphics[width=\textwidth]{cinves}$^\dag$\\
-    \rule{0in}{1.2em}$^\dag$\scriptsize Hardware in the loop framework proposal for a semi-autonomous car architecture in a closed route environment \cite{CurielRamirez2019}
+    \includegraphics[width=\textwidth]{canny}
   \end{columns}
 \end{frame}
 
-\begin{frame}{Panorama Planificación de trayectorias}
-  %\cite{nphard}[\citenum{nphard}] \cite{5427034}[\citenum{5427034}]
-  %Calcular la ruta más corta entre dos puntos en un ambiente 3D es un problema NP-HARD.
-  %La mayoria de planificadores de rutas hacen uso de heuristicas y metaheuristicas para
-  %generar el óptimo más cercano \\
-  \begin{figure}
-    \centering
-    \includegraphics[scale=0.33]{cinves}
-    \caption[Caption for LOF]{Clasificación del enfoque de planificación de rutas\footnotemark}
-  \end{figure}
-  \footnotetext{Different Cell Decomposition Path Planning Methods for Unmanned Air Vehicles - A Review \cite{Debnath2020}}
+\begin{frame}{Mejoramiento de la imagen}
+
+  \centering
+  \animategraphics[loop,width=9cm]{10}{paso}{0}{10}
+    
 \end{frame}
 
-\begin{frame}{Representación del ambiente 3D}
-  %MOSTRAR OCTOMAP
-  %MOSTRAR MAPA 3D
-  \begin{figure}
-    \centering
-    \includegraphics[scale=0.15]{cinves}
-    \caption[Caption for LOF]{Mapa probabilistico 3D\protect\footnotemark}
-  \end{figure}
-  \footnotetext{Cooperación en robots heterogeneos}
+\section{Obtención de rasgos}
+\begin{frame}{Obtención de rasgos}
+  \bigskip % Vertical whitespace
+  \centering
+  \begin{itemize}
+  \item Rasgos Geométricos
+    \pause
+    \begin{itemize}
+    \item Redondez
+    \item Circularidad
+    \item Compacidad
+    \item Factor de forma
+    \end{itemize}
+    \pause
+  \item Rasgos Momentos de Hue (7)
+    \pause
+  \item Rasgos Esqueletización
+    \pause
+    \begin{itemize}
+    \item Número de puntos finales
+    \item Número de ramas
+    \item Número de píxeles
+    \end{itemize}
+  \item Rasgos Cerco Convexo
+    \pause
+    \begin{itemize}
+    \item Solidez
+    \item Convexidad
+    \end{itemize}
+  \end{itemize}
 \end{frame}
 
-\section{Clasificador K-nn}
-\begin{frame}
-  \frametitle{Planteamiento del problema}
+
+\section{Clasificador K-KNN}
+\begin{frame}{Clasificador K-NN}
   \begin{columns}
     \column{0.5\textwidth}
-    \justifying
-    \small Desarrollar una estrategia de exploración multi-VANT que reduzca el tiempo total de exploración dado un conjunto de $\mathcal{V}$ vehículos aéreos no tripulados. Las capacidades limitadas de energía y sensores abordo de los VANTS les permiten navegar de forma autónoma. Teniendo en cuenta sus limitaciones de energía y la necesidad de una exploración eficiente, el objetivo es determinar la trayectoria, las rutas y la asignación de tareas óptimas ó sub-óptimas.
-    \column{0.5\textwidth}\\
-    \pause
-    \centering
-    \small Retos multi-VANT
+    Cualidades:
+    
     \begin{itemize}
-    \small \item Coordinación - Establecer comunicación efectiva entre los múltiples VANTs. Intercambiar información relevante. Tener baja latencia en su comunicación.
-    \small \item Planificación - Los VANTs deben coordinar sus movimientos para evitar colisiones y lograr una cobertura eficiente del área objetivo.
-    \small \item Asignación de tareas - Se busca evitar la duplicación de esfuerzos optimizando el uso de recursos disponibles.
+      \pause
+    \item Simplicidad
+      \pause
+    \item Generación de fronteras de decisión no lineales
+      \pause
+    \item Multiclase
+      \pause
+    \item Tiempo de cómputo razonable\footnote{Puede ser costoso si se cuentan con un data set grande}
     \end{itemize}
+    \column{0.5\textwidth}
+    \includegraphics[width=\textwidth]{knn}
+    
   \end{columns}
 \end{frame}
 
 \section{Resultados}
-\begin{frame}
-  \frametitle{Objetivos generales y específicos del proyecto}
-  \begin{enumerate}
-  \item<1-> General \\
-    Diseñar una arquitectura de software descentralizada para implementar una estrategia multi-VANT capaz de resolver los problemas de localización y coordinación en ambientes desconocidos y dinámicos para tareas de exploración en interiores.
-    \pause
-  \item<2-> Particulares\\
-    \begin{itemize}
-    \item Diseño de solución en base a los algoritmos reportados en la literatura.
-      \pause
-    \item Valoración propuesta (simulación de propuesta).
-      \pause
-    \item Comparación y análisis (escalabilidad, robustez y recursos computacionales).
-    \end{itemize}
-  \end{enumerate}
-\end{frame}
+\begin{frame}{Resultados}
 
-%Explicar con el cronograma
-\section{Script de Data Aumentation}
-\begin{frame}{Metodología/Cronograma}
-  \begin{figure}
-    \centering
-    \includegraphics[width=11cm, height=8cm]{cinves}
-  \end{figure}
-\end{frame}
-
-\section{Script de Obtención de rasgos}
-\begin{frame}{Estado del Arte}
-  \bigskip % Vertical whitespace
+  \begin{figure}[h]
   \centering
-  \begin{tabular}{ | p{4cm} | p{3cm} | p{2.5cm} | p{3.5cm}|}
-    \hline
-    \scriptsize REFERENCIA&
-    \scriptsize REPRESENTACION&
-    \scriptsize BUSQUEDA&
-    \scriptsize Control de trayectoria\\
-    \hline
-    \hline
-    %--------------------------
-    \scriptsize \cite{CIESLEWSKI2017}[\citenum{CIESLEWSKI2017}]&
-    \scriptsize Octomap&
-    \scriptsize Basado en fronteras&
-    \scriptsize Control directo de velocidad\\ \hline
-    %--------------------------
-    \scriptsize \cite{USENKO2017}[\citenum{USENKO2017}]&
-    \scriptsize Cuadr\'{i}cula egoc\'{e}ntrica&
-    \scriptsize Offline RRT*&
-    \scriptsize Curvas de Bezier\\ \hline 
-    %--------------------------
-    \scriptsize \cite{MOHTA2017}[\citenum{MOHTA2017}]&
-    \scriptsize mapa 3D-Local y 2D-Global&
-    \scriptsize A*&
-    \scriptsize Prograci\'{o}n cuadr\'{a}tica \\ \hline 
-    %--------------------------
-    \scriptsize \cite{LIN2017}[\citenum{LIN2017}]&
-    \scriptsize 3D voxel array TSDF&
-    \scriptsize A*&
-    \scriptsize Optimizaci\'{o}n cuadr\'{a}tica \\ \hline
-    %--------------------------
-    \scriptsize \cite{PAPACHRISTOS2017}[\citenum{PAPACHRISTOS2017}]&
-    \scriptsize Octomap&
-    \scriptsize NBVP&
-    \scriptsize Control directo de velocidad \\ \hline
-    %--------------------------
-    \scriptsize \cite{OLEYNIKOVA2018}[\citenum{OLEYNIKOVA2018}]&
-    \scriptsize Voxel Hashing TSDF&
-    \scriptsize NBVP&
-    \scriptsize Optimizaci\'{o}n cuadr\'{a}tica \\ \hline
-    %--------------------------
-    \scriptsize \cite{GAO2018}[\citenum{GAO2018}]&
-    \scriptsize Mapa de cuadr\'{i}cula&
-    \scriptsize M\'{e}todo de marcha r\'{a}pida&
-    \scriptsize Optimizaci\'{o}n cuadr\'{a}tica \\ \hline
-  \end{tabular}
-\end{frame}
-
-\begin{frame}
+  \begin{subfigure}{0.4\linewidth}
+    \includegraphics[width=\linewidth]{resultados_colores/resultado_claro_hue_1}
+    \caption{Fondo Blanco-Hue 100\%}
+  \end{subfigure}
+  \begin{subfigure}{0.4\linewidth}
+    \includegraphics[width=\linewidth]{resultados_colores/resultado_azul_geom_0_97}
+    \caption{Fondo Azul-Geométricos 97\%}
+  \end{subfigure}
+  \begin{subfigure}{0.4\linewidth}
+    \includegraphics[width=\linewidth]{resultados_colores/resultado_negro_hue_1}
+    \caption{Fondo Negro-Hue 100\%}
+  \end{subfigure}
+  \begin{subfigure}{0.4\linewidth}
+    \includegraphics[width=\linewidth]{resultados_colores/resultado_rojo_hue_1}
+    \caption{Fondo Rojo-Hue 100\%?}
+  \end{subfigure}
+  %\caption{Técnicas probadas}
+  \label{fig:1}
+\end{figure}
   
-  \centering
-  \begin{tabular}{ | p{4cm} | p{3cm} | p{2.5cm} | p{3.5cm}|}
-    \hline
-    \scriptsize REFERENCIA&
-    \scriptsize MAPA&
-    \scriptsize Planificador de rutas&
-    \scriptsize Control trayectoria\\
-    \hline
-    \hline
-    %--------------------------
-    \scriptsize \cite{FLORENCE2018}[\citenum{FLORENCE2018}]&
-    \scriptsize Busqueda basada en visibilidad&
-    \scriptsize 2D A*&
-    \scriptsize Control MPC \\ \hline
-    %--------------------------
-    \scriptsize \cite{SELIN2019}[\citenum{SELIN2019}]&
-    \scriptsize Octomap&
-    \scriptsize NBVP&
-    \scriptsize Control directo de velocidad \\ \hline
-    %--------------------------
-    \scriptsize \cite{BUG2019}[\citenum{BUG2019}]&
-    \scriptsize NA&
-    \scriptsize SGBA&
-    \scriptsize Control directo de velocidad \\ \hline
-    %--------------------------
-    \scriptsize \cite{COLLINS2019}[\citenum{COLLINS2019}]&
-    \scriptsize KD Tree $+$ Mapa en Voxel&
-    \scriptsize B\'{u}squeda en Grafo&
-    \scriptsize Movimientos suaves \\ \hline
-    %--------------------------
-    \scriptsize \cite{CINVES2021}[\citenum{CINVES2021}]&
-    \scriptsize Octree&
-    \scriptsize RRT&
-    \scriptsize Basado en contornos \\ \hline
-    %--------------------------
-    \scriptsize \cite{RACER2022}[\citenum{RACER2022}]&
-    \scriptsize Octomap HGrid&
-    \scriptsize NBVP&
-    \scriptsize Control directo de velocidad \\ \hline
-    %--------------------------
-    %\cite{WESTHEIDER2023}&
-    %Mapa de cuadr\'{i}cula&
-    %Deep Learning&
-    %Control directo de velocidad&
-    %\ding{51}\\ \hline
-    %--------------------------
-    %\cite{BARTOLOMEI2023}&
-    %Mapa de cuadr\'{i}cula&
-    %NBVP&
-    %Control directo de velocidad&
-    %\ding{51}\\ \hline
-  \end{tabular}
-  
-  
-  
-%\begin{figure}
-%  \centering
-%  \includegraphics[width=10cm, height=6cm]{estado_del_arte}
-%\end{figure}
 \end{frame}
 
 \section{Conclusiones}
-\begin{frame}
-  \frametitle{Contribuciones o resultados esperados}
-  \begin{enumerate}
-  \item<1-> Documentación y códigos liberados
-    \begin{itemize}
-    \item Algoritmo para la exploración multi-VANT
-    \item Algoritmo para la planificación de rutas multi-VANT
-    \item Protocolo de comunicación y coordinación descentralizados multi-VANT que formaran parte de la arquitectura de software
-    \end{itemize}
-  \item<2-> Validación de la solución en un simulador
-  \item<3-> Tesis impresa
-  \end{enumerate}
+\begin{frame}{Conclusiones}
+  \centering
+  \includegraphics[width=5cm]{chihuahua}
+  \footnote{\url{https://www.freecodecamp.org/news/chihuahua-or-muffin-my-search-for-the-best-computer-vision-api-cbda4d6b425d/}}
 \end{frame}
 
-\begin{frame}[allowframebreaks,noframenumbering]{Bibliografía}
-  \tiny
-  \bibliographystyle{abbrvnat}
-  \bibliography{test}
-\end{frame}
+%\begin{frame}[allowframebreaks,noframenumbering]{Bibliografía}
+%  \tiny
+%  \bibliographystyle{abbrvnat}
+%  \bibliography{test}
+%\end{frame}
 
 \end{document} 
