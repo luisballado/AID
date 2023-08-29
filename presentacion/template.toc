@@ -1,5 +1,5 @@
 \babel@toc {spanish}{}\relax 
-\beamer@sectionintoc {1}{Conjunto de imagenes}{2}{0}{1}
+\beamer@sectionintoc {1}{Conjunto de imágenes}{2}{0}{1}
 \beamer@sectionintoc {2}{Segmentación}{5}{0}{2}
 \beamer@sectionintoc {3}{Obtención de rasgos}{11}{0}{3}
 \beamer@sectionintoc {4}{Clasificador K-KNN}{18}{0}{4}
