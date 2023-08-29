@@ -4,4 +4,4 @@
 \beamer@sectionintoc {3}{Obtención de rasgos}{11}{0}{3}
 \beamer@sectionintoc {4}{Clasificador K-KNN}{18}{0}{4}
 \beamer@sectionintoc {5}{Resultados}{24}{0}{5}
-\beamer@sectionintoc {6}{Conclusiones}{26}{0}{6}
+\beamer@sectionintoc {6}{Conclusiones}{29}{0}{6}
